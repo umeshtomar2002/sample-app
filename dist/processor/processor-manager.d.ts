@@ -1,0 +1,36 @@
+import { HealthMonitorProcessor, ProcessorOptions } from './processor.types';
+import { FrameData } from '../common/types';
+export declare class ProcessorManager implements HealthMonitorProcessor {
+    private readonly state;
+    private readonly onFaceDetected;
+    private readonly onVitalSign;
+    private readonly onFinalResults;
+    private readonly onError;
+    private readonly onWarning?;
+    private readonly resolveFeatures;
+    private readonly logAlgoMeasurements;
+    private readonly doLogging;
+    private readonly doPerformance;
+    private readonly doRecording;
+    private readonly doMeasuring;
+    private readonly sdkLogger;
+    private osType;
+    private readonly logs;
+    private measurementStartTime;
+    private errorListener;
+    constructor({ onFaceDetected, onVitalSign, onFinalResults, onError, onWarning, resolveFeatures, logAlgoMeasurements, doLogging, doPerformance, doRecording, doMeasuring, sdkLogger, }: ProcessorOptions);
+    init(): Promise<void>;
+    private setReportListener;
+    private setFaceListener;
+    setErrorListener: (onError: any) => void;
+    private setMessageListener;
+    private publishError;
+    private publishWarning;
+    private publishAlgoMessage;
+    close(): void;
+    process(frameData: FrameData): void;
+    start(): void;
+    stop(withReport: boolean): Promise<void>;
+    private getMeasurementTime;
+    private publishLogs;
+}

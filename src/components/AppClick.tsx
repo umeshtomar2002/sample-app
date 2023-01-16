@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom'; 
 import App from './App';
-import {Formik} from 'formik';
 
 
 class AppClick extends React.Component{   
@@ -18,7 +17,7 @@ class AppClick extends React.Component{
    
     render() {
         return (            
-                <Button onClick={this.handleClick} />           
+              <></>           
         )
       }
 }
