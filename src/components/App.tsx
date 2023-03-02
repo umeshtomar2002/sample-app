@@ -1,86 +1,25 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import styled from 'styled-components';
-import BinahMonitor from './BinahMonitor';
-import SettingsBars from './SettingsBars';
-import { Flex } from './shared/Flex';
-import { useCameras, useDisableZoom } from '../hooks';
-import UAParser from 'ua-parser-js';
+import React from 'react';
+import ReactDOM from 'react-dom'; 
+import BinahSdkImpl from './BinahSdkImpl';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Login from './Login';
+import AddUser from './AddUser';
+import SaveUser from './SaveUser';
+import ViewReports from './ViewReports';
+import PerformTest from './PerformTest';
 
-const Container = styled(Flex)<{ isSettingsOpen: boolean }>`
-  height: 100%;
-  width: 100%;
-  position: relative;
-  flex-direction: column;
-  justify-content: start;
-  align-items: center;
-  background-color: ${({ isSettingsOpen }) =>
-    isSettingsOpen && 'rgba(0, 0, 0, 0.5)'};
-`;
+export default function App() {
 
-const App = () => {
-  const cameras = useCameras();
-  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
-  const [cameraId, setCameraId] = useState<string>();
-  const [isLicenseValid, setIsLicenseValid] = useState(false);
-  const [isMobile] = useState(
-    UAParser(navigator.userAgent).device.type === 'mobile',
-  );
-  useDisableZoom();
-
-  const onSettingsClickedHandler = useCallback((event) => {
-    const settingsBars = document.getElementById('settingsBars');
-    const isSettingsButtonClicked = event.target.id === 'settingsButton';
-
-    const isInsideSettingsClicked =
-      settingsBars.contains(event.target as Node) || isSettingsButtonClicked;
-
-    if (!isInsideSettingsClicked) {
-      setIsSettingsOpen(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    document.addEventListener('click', onSettingsClickedHandler);
-    return () => {
-      document.removeEventListener('click', onSettingsClickedHandler);
-    };
-  }, []);
-
-  const updateLicenseStatus = useCallback((valid) => {
-    setIsLicenseValid(valid);
-  }, []);
-
-  const toggleSettingsClick = useCallback(() => {
-    setIsSettingsOpen(!isSettingsOpen);
-  }, [isSettingsOpen]);
-
-  const handleCloseSettings = useCallback(({ cameraId }) => {
-    setCameraId(cameraId);
-    setIsSettingsOpen(false);
-  }, []);
-
-  useEffect(() => {
-    if (!cameras?.length) return;
-    setCameraId(cameras[0].deviceId);
-  }, [cameras]);
-
-  return (
-    <Container isSettingsOpen={isSettingsOpen}>
-      <BinahMonitor
-        showMonitor={!(isMobile && isSettingsOpen)}
-        cameraId={cameraId}
-        onLicenseStatus={updateLicenseStatus}
-        onSettingsClick={toggleSettingsClick}
-        isSettingsOpen={isSettingsOpen}
-      />
-      <SettingsBars
-        open={isSettingsOpen}
-        onClose={handleCloseSettings}
-        cameras={cameras}
-        isLicenseValid={isLicenseValid}
-      />
-    </Container>
-  );
-};
-
-export default App;
+        return ( 
+          <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<Login />} />           
+                <Route path="addUser" element={<AddUser />} />              
+                <Route path="binah" element={<BinahSdkImpl />} />
+                <Route path="saveUser" element={<SaveUser />} />
+                <Route path="viewReport" element={<ViewReports/>} />
+                <Route path="performTest" element={<PerformTest/>} />                                 
+            </Routes>
+          </BrowserRouter>
+        )     
+}

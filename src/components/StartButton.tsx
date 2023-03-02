@@ -40,7 +40,7 @@ export interface IStartButton {
   /**
    *  Displays a spinner when isLoading is true
    */
-  isLoading;
+  isLoading:boolean;
   /**
    *  function triggered on button click
    */

@@ -235,8 +235,7 @@ const BinahMonitor = ({
   const desktop = useMemo(() => !isTablet() && !isMobile(), []);
 
   return (
-    <>
-      <TopBar onSettingsClick={onSettingsClick} isMeasuring={isMeasuring()} />
+    <>      
       <MonitorWrapper isSettingsOpen={isSettingsOpen}>
         <MeasurementContentWrapper isMobile={mobile}>
           <InfoBarWrapper>

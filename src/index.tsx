@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import BinahSdkImpl from './components/BinahSdkImpl';
 import App from './components/App';
-import AppClick from './components/AppClick';
 import GlobalStyle from './style/global';
 import styled from 'styled-components';
 

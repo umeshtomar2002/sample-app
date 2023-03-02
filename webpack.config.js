@@ -28,13 +28,20 @@ function common() {
     target: 'web',
     entry: [paths.src],
     resolve: {
-      extensions: ['.ts', '.tsx', '.js', '.jsx'],
+      extensions: ['.ts', '.tsx', '.js', '.jsx','.css','.scss'],
       modules: [paths.src, paths.node_modules],
     },
     experiments: { asyncWebAssembly: true },
     module: {
       rules: [
         { test: /\.tsx?$/, loader: 'ts-loader' },
+        {
+          test: /\.css$/,
+          use: [
+            { loader: 'style-loader' },
+            { loader: 'css-loader' },
+          ],
+        },
         {
           test: /\.svg$/,
           use: [

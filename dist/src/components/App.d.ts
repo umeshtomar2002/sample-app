@@ -1,2 +1,2 @@
-declare const App: () => JSX.Element;
-export default App;
+/// <reference types="react" />
+export default function App(): JSX.Element;
