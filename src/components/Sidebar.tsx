@@ -6,9 +6,19 @@ import Myprofile from'../assets/images/my_profile.svg';
 import ScanSvg from'../assets/images/scan.svg';
 import ReportSvg from'../assets/images/report.svg';
 import LogoutSvg from'../assets/images/logout.svg';
+import { useNavigate } from "react-router-dom";
 
 
 export default function sidebar(){
+    let navigate = useNavigate();
+    
+    function performanceTestPage() {
+        navigate('/performTest'); 
+    }
+
+    function viewReportPage() {
+        navigate('/viewReport',{state:{id:1,name:'sabaoon'}}); 
+    }
 
     return(
         <>
@@ -29,9 +39,9 @@ export default function sidebar(){
                     
                     <nav id="menu">
                         <ul>
-                            <li><a href="binah.html"><img src={Myprofile} alt=""/> My Profile</a></li>
-                            <li><a href="binah.html"><img src={ScanSvg} alt=""/>Measure Now</a></li>
-                            <li><a href="binah-5.html"><img src={ReportSvg} alt=""/> View Reports</a></li>
+                            <li><a href="#"><img src={Myprofile} alt=""/> My Profile</a></li>
+                            <li><a href="#" onClick={()=>performanceTestPage()}><img src={ScanSvg} alt=""/>Measure Now</a></li>
+                            <li><a href="#" onClick={()=>viewReportPage()}><img src={ReportSvg} alt=""/> View Reports</a></li>
                             <li><a href="#"><img src={LogoutSvg} alt=""/> Logout</a></li>	
                         </ul>
                     </nav>

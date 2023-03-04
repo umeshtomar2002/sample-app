@@ -10,11 +10,11 @@ export default function AddUser() {
     console.log(location);
 
     function saveUserPage(): void {
-        navigate('/saveUser',{state:{id:1,name:'sabaoon'}});
+        navigate('/saveUser');
     }
     
     function performanceTestPage(): void {
-        navigate('/performTest',{state:{id:1,name:'sabaoon'}}); 
+        navigate('/performTest'); 
     }
     
     return(
@@ -49,8 +49,9 @@ export default function AddUser() {
                                 
                             </div>
                 </div> 
+                <Sidebar />
             </div>
-            <Sidebar />
+            
             {/* <div>
                 <h1> Add User</h1>
                 <Link to="/binah">Binah sdk</Link>

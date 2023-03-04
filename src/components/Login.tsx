@@ -33,7 +33,7 @@ export default function Login(){
                                                 return errors;
                                             }}
                                             onSubmit={(values,  {setSubmitting}) => {
-                                                navigate('/addUser',{state:{id:1,name:'sabaoon'}});
+                                                navigate('/addUser');
                                             }}>
                                             {({
                                                 values,
@@ -80,7 +80,7 @@ export default function Login(){
                 </div>
             </div>
 
-            <div>
+            {/* <div>
                 
                 <h1> Login</h1>
                 <Link to="/addUser">Add  User </Link>
@@ -88,7 +88,7 @@ export default function Login(){
                 <Link to="/viewReport">Reports</Link>
                 <Link to="/performTest">performTest</Link>
                                 
-            </div>
+            </div> */}
 
             </>
         )
