@@ -17,7 +17,11 @@ export default function sidebar(){
     }
 
     function viewReportPage() {
-        navigate('/viewReport',{state:{id:1,name:'sabaoon'}}); 
+        navigate('/viewReport'); 
+    }
+
+    function addUserPage() {
+        navigate('/addUser');
     }
 
     return(
@@ -39,7 +43,7 @@ export default function sidebar(){
                     
                     <nav id="menu">
                         <ul>
-                            <li><a href="#"><img src={Myprofile} alt=""/> My Profile</a></li>
+                            <li><a href="#" onClick={()=>addUserPage()}><img src={Myprofile} alt=""/> My Profile</a></li>
                             <li><a href="#" onClick={()=>performanceTestPage()}><img src={ScanSvg} alt=""/>Measure Now</a></li>
                             <li><a href="#" onClick={()=>viewReportPage()}><img src={ReportSvg} alt=""/> View Reports</a></li>
                             <li><a href="#"><img src={LogoutSvg} alt=""/> Logout</a></li>	
