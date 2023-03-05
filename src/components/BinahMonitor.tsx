@@ -267,7 +267,7 @@ const BinahMonitor = ({
             {isMeasuring() && <WarningAlert message={warningMessage} />}
             {isMeasuring() && <InfoAlert message={info.message} />}
             {sessionState === SessionState.STOPPING && console.log("Stop =====> " + JSON.stringify(vitalSigns) )}
-            {sessionState === SessionState.STOPPING &&  <Navigate to="/viewReport" state={vitalSigns} replace={true} />}            
+            {sessionState === SessionState.STOPPING &&  <Navigate to="/currentReport" state={vitalSigns} replace={true} />}            
             {!isVideoReady() && licenseKey && <Loader />}
           </VideoAndStatsWrapper>
           <ButtomTimerWrapper>

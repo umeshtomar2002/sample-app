@@ -2084,6 +2084,16 @@ button,
   /*border-bottom: solid 5px #ee7a22;*/
   padding: 6em 0 1em 0;
   position: relative; }
+
+  #header1 {
+    display: -moz-flex;
+    display: -webkit-flex;
+    display: -ms-flex;
+    display: flex;
+    /*border-bottom: solid 5px #ee7a22;*/
+    padding: 1em 0 1em 0;
+    position: relative; }
+
   #header > * {
     -moz-flex: 1;
     -webkit-flex: 1;
@@ -2112,6 +2122,35 @@ button,
         position: absolute;
         right: -0.5em;
         top: 0; } }
+
+        #header1 > * {
+          -moz-flex: 1;
+          -webkit-flex: 1;
+          -ms-flex: 1;
+          flex: 1;
+          margin-bottom: 0; }
+        #header1 .logo {
+          border-bottom: 0;
+          color: inherit;
+          font-family: "Roboto Slab", serif;
+          font-size: 1.125em; }
+        #header1 .icons {
+          text-align: right; }
+        @media screen and (max-width: 1680px) {
+          #header1 {
+           padding-top: 1em; font-size:2rem; } }
+        @media screen and (max-width: 736px) {
+          #header1 {
+            padding-top: 6.5em; }
+            #header1 .logo {
+              font-size: 1.25em;
+              margin: 0; }
+            #header1 .icons {
+              height: 5em;
+              line-height: 5em;
+              position: absolute;
+              right: -0.5em;
+              top: 0; } }        
 
 /* Banner */
 #banner {

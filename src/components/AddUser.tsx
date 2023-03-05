@@ -15,7 +15,7 @@ export default function AddUser() {
     }
     
     function performanceTestPage(): void {
-        navigate('/performTest',{state:{id:1,name:'sabaoon'}}); 
+        navigate('/binah',{state:{id:1,name:'sabaoon'}}); 
     }
     
     function backButton() {
@@ -42,8 +42,8 @@ export default function AddUser() {
                                 <section id="banner">
                                     <div className="content">
                                         <header>
-                                            <h1>Good Morning, Chandan</h1>
-                                            <p>WHOM DO YOU WANT TO TEST TODAY ?</p>
+                                            <h1>Hello</h1>
+                                            <p>Whom do you want to test today ?</p>
                                         </header>                                                
                                         <ul className="actions">
                                             <li><a href="#" className=" button large icon solid fa-user" onClick={()=>performanceTestPage()}> Self</a></li>

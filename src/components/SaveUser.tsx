@@ -3,7 +3,7 @@ import { Link,useLocation,useNavigate } from "react-router-dom";
 import  "../assets/css/main.css";
 import { Field, Formik } from "formik";
 import Sidebar from "./Sidebar";
-import { Button, Input } from "antd";
+import { Button, DatePicker, Input } from "antd";
 
 export default function saveUser() { 
 
@@ -23,7 +23,7 @@ export default function saveUser() {
 						<section className="inner">							
 								<header id="header">
 									<ul className="icons">
-										<li><a href="#" className="icon"><i className="fa fa-language" aria-hidden="true"></i></a></li>
+										{/* <li><a href="#" className="icon"><i className="fa fa-language" aria-hidden="true"></i></a></li> */}
 										<li><Button onClick={()=> backButton()}> Back </Button></li>
 									</ul>
 								</header>
@@ -33,7 +33,7 @@ export default function saveUser() {
 									<div className="content">
 										<header>
 											<h2>A bit about your Family/Friend</h2>
-											<p>Share some personal information about you?</p>
+											<span>Share some personal information about you</span>
 										</header>
                                             <Formik  initialValues={{ name:'',email: '', mobile: '',dob:'',gender:'',weight:'',height:''}}
                                                     onSubmit={async (values,  {setSubmitting}) => {
@@ -49,6 +49,7 @@ export default function saveUser() {
                                                         handleBlur,
                                                         handleSubmit,
                                                         submitForm,
+                                                        setFieldValue,
                                                         isSubmitting,                                                        
                                                       }) => (
                                                         <form onSubmit={handleSubmit}>
@@ -70,7 +71,7 @@ export default function saveUser() {
                                                                         onChange={handleChange}
                                                                         onBlur={handleBlur}
                                                                         value={values.email}
-                                                                        placeholder='abc@gmail.com'
+                                                                        placeholder='Enter Email'
                                                                     />
                                                                 </div>
                                                                 <div className="col-6 col-12-xsmall">																    
@@ -80,17 +81,13 @@ export default function saveUser() {
                                                                         onChange={handleChange}
                                                                         onBlur={handleBlur}
                                                                         value={values.mobile}
-                                                                        placeholder='Enter Moible No'
+                                                                        placeholder='Enter Mobile No.'
                                                                     />
                                                                 </div>
                                                                 <div className="col-6 col-12-xsmall">
-                                                                    <Input
-                                                                        type="text"
+                                                                    <DatePicker
                                                                         name="dob"
-                                                                        onChange={handleChange}
-                                                                        onBlur={handleBlur}
-                                                                        value={values.dob}
-                                                                        placeholder='Date of birth'
+                                                                        placeholder="DD-MM-YYYY"                                                                                                                     
                                                                     />
                                                                 </div>
                                                                     <div id="my-radio-group" className="col-1 col-12-small">Gender</div>
@@ -106,7 +103,17 @@ export default function saveUser() {
                                                                         <label htmlFor="other"> Other </label>   
                                                                     </div>
                                                                     <div className="col-6 col-12-small">
-                                                                        <select
+
+                                                                    <Input
+                                                                        type="text"
+                                                                        name="weight"                                                                        
+                                                                        onChange={handleChange}
+                                                                        onBlur={handleBlur}
+                                                                        value={values.weight}
+                                                                        placeholder='Enter weight in KGs.'
+                                                                    />
+
+                                                                        {/* <select
                                                                             name="weight"
                                                                             value={values.weight}
                                                                             onChange={handleChange}
@@ -126,10 +133,20 @@ export default function saveUser() {
                                                                                 <option value="70" label="70 kgs">
                                                                                     70 kgs
                                                                                 </option>
-                                                                        </select>                                                                        
+                                                                        </select>                                                                         */}
                                                                     </div>
                                                                 <div className="col-6 col-12-small">
-                                                                    <select
+
+                                                                    <Input
+                                                                        type="text"
+                                                                        name="height"                                                                        
+                                                                        onChange={handleChange}
+                                                                        onBlur={handleBlur}
+                                                                        value={values.height}
+                                                                        placeholder='Enter height in CMs.'
+                                                                    />
+
+                                                                    {/* <select
                                                                         name="height"
                                                                         value={values.height}
                                                                         onChange={handleChange}
@@ -149,7 +166,7 @@ export default function saveUser() {
                                                                             <option value="70" label="70 kgs">
                                                                                 70 kgs
                                                                             </option>
-                                                                    </select>
+                                                                    </select> */}
                                                                 </div>
                                                                 <div className="col-12 mt-20">
                                                                     <ul className="actions">

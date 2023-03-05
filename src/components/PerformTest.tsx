@@ -62,7 +62,7 @@ export default function performTest(){
                                                                 <div className="col-3 col-6-small">
                                                                     <Field type="checkbox" id="Breathing-Rate" name="BreathingRate"/>
                                                                     <label htmlFor="Breathing-Rate">Breathing Rate</label></div>
-                                                                <div className="col-2 col-6-small">
+                                                                <div className="col-3 col-6-small">
                                                                     <Field type="checkbox" id="PRQ-Rate" name="PRQRate"/>
                                                                     <label htmlFor="PRQ-Rate">PRQ</label>
                                                                 </div>
@@ -74,14 +74,6 @@ export default function performTest(){
                                                                     <Field type="checkbox" id="Blood-Rate" name="BloodRate"/>
                                                                     <label htmlFor="Blood-Rate">Blood Pressure</label>
                                                                 </div>
-                                                                <div className="col-2 col-6-small">
-                                                                    <Field type="checkbox" id="Hemoglobin-Rate" name="HemoglobinRate"/>
-                                                                    <label htmlFor="Hemoglobin-Rate">Hemoglobin</label>
-                                                                </div>
-                                                                <div className="col-2 col-6-small">
-                                                                    <Field type="checkbox" id="HbA1c-Rate" name="HbA1cRate"/>
-                                                                    <label htmlFor="HbA1c-Rate">HbA1c</label>
-                                                                </div>
                                                                 <div className="col-3 col-6-small">
                                                                     <Field type="checkbox" id="Stress-Rate" name="StressRate"/>
                                                                     <label htmlFor="Stress-Rate">Stress Level</label>
@@ -92,11 +84,19 @@ export default function performTest(){
                                                                 </div>
                                                                 <div className="col-3 col-6-small">
                                                                     <Field type="checkbox" id="Stree-Rate" name="StreeRate"/>
-                                                                    <label htmlFor="Stree-Rate">Stree Response</label>
+                                                                    <label htmlFor="Stree-Rate">Stress Response</label>
                                                                 </div>
                                                                 <div className="col-3 col-6-small">
                                                                     <Field type="checkbox" id="HRV-Rate" name="HRVRate" />
                                                                     <label htmlFor="HRV-Rate">HRV-SDNN</label>
+                                                                </div>
+                                                                <div className="col-3 col-6-small">
+                                                                    <Field type="checkbox" id="Hemoglobin-Rate" name="HemoglobinRate"/>
+                                                                    <label htmlFor="Hemoglobin-Rate">Hemoglobin</label>
+                                                                </div>
+                                                                <div className="col-2 col-6-small">
+                                                                    <Field type="checkbox" id="HbA1c-Rate" name="HbA1cRate"/>
+                                                                    <label htmlFor="HbA1c-Rate">HbA1c</label>
                                                                 </div>
                                                                 
                                                                 <div className="col-12">

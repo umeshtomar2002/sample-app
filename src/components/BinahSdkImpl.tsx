@@ -72,35 +72,32 @@ const BinahSdkImpl = () => {
     navigate(-1)
   }
 
-  return (
-    <div id="wrapper">
-      <div id="main"> 
-          <div className="inner">
-          <header id="header">
+  return (    
+        <div className="inner">
+          <header id="header1">
 							<ul className="icons">
-								<li><a href="#" className="icon"><i className="fa fa-language" aria-hidden="true"></i></a></li>
-                                <li><Button onClick={()=> backButton()}> Reset </Button></li>
+								{/* <li><a href="#" className="icon"><i className="fa fa-language" aria-hidden="true"></i></a></li> */}
+                <li><Button onClick={()=> backButton()}> Back </Button></li>
 							</ul>
-						</header>
-           </div> 
-           </div>
-      <Container isSettingsOpen={isSettingsOpen}> 
-        <BinahMonitor
-          showMonitor={!(isMobile && isSettingsOpen)}
-          cameraId={cameraId}
-          onLicenseStatus={updateLicenseStatus}
-          onSettingsClick={toggleSettingsClick}
-          isSettingsOpen={isSettingsOpen}
-        />
-        <SettingsBars
-          open={isSettingsOpen}
-          onClose={handleCloseSettings}
-          cameras={cameras}
-          isLicenseValid={isLicenseValid}
-        />
-      </Container>
-      <Sidebar />
-    </div>
+						</header>            
+                <div className="content">
+                  <Container isSettingsOpen={isSettingsOpen}> 
+                    <BinahMonitor
+                      showMonitor={!(isMobile && isSettingsOpen)}
+                      cameraId={cameraId}
+                      onLicenseStatus={updateLicenseStatus}
+                      onSettingsClick={toggleSettingsClick}
+                      isSettingsOpen={isSettingsOpen}
+                    />
+                    <SettingsBars
+                      open={isSettingsOpen}
+                      onClose={handleCloseSettings}
+                      cameras={cameras}
+                      isLicenseValid={isLicenseValid}
+                    />
+                  </Container>
+                  </div>                 
+          </div>         
   );
 };
 

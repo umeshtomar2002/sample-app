@@ -79,9 +79,9 @@ const InfoBar = ({
   return (
     <InfoContent>
       <LicenseInfo>
-        {!isMeasuring && offlineMeasurements
+        {/* {!isMeasuring && offlineMeasurements
           ? `License: ${offlineMeasurements.offlineMeasurementsRemaining}/${offlineMeasurements.offlineMeasurements}`
-          : ''}
+          : ''} */}
         {!isMeasuring && offlineMeasurements?.measurementSecondsEnd
           ? measurementSecondsEndToDisplay
           : ''}
