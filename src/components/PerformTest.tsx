@@ -9,6 +9,10 @@ export default function performTest(){
 
     let navigate = useNavigate();
 
+    function backButton() {
+        navigate(-1);
+    }
+
     return(
         <>
             <div id="wrapper">
@@ -16,7 +20,8 @@ export default function performTest(){
                     <div className="inner">
                         <header id="header">
                             <ul className="icons">
-                                <li><a href="#" className="icon"><i className="fa fa-language" aria-hidden="true"></i></a></li>										
+                                <li><a href="#" className="icon"><i className="fa fa-language" aria-hidden="true"></i></a></li>
+                                <li><Button onClick={()=> backButton()}> Back </Button></li>										
                             </ul>
                         </header>
                         <section id="inside">
@@ -109,7 +114,6 @@ export default function performTest(){
                         </section>                
                     </div>
                 </div>
-                <Sidebar />
             </div>
                         
         </>

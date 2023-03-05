@@ -1,3 +1,4 @@
+import { Button } from "antd";
 import React from "react";
 import { Link,useLocation,useNavigate} from "react-router-dom";
 import  "../assets/css/main.css";
@@ -10,13 +11,17 @@ export default function AddUser() {
     console.log(location);
 
     function saveUserPage(): void {
-        navigate('/saveUser');
+        navigate('/saveUser',{state:{id:1,name:'sabaoon'}});
     }
     
     function performanceTestPage(): void {
-        navigate('/performTest'); 
+        navigate('/performTest',{state:{id:1,name:'sabaoon'}}); 
     }
     
+    function backButton() {
+        navigate(-1);
+    }
+
     return(
         <div>           
             <div id="wrapper">
@@ -27,6 +32,7 @@ export default function AddUser() {
                                             <li>
                                                 <a href="#" className="icon">
                                                     <i className="fa fa-language" aria-hidden="true"></i>
+                                                    <li><Button onClick={()=> backButton()}> Back </Button></li>	
                                                 </a>
                                             </li>
                                             
@@ -49,7 +55,6 @@ export default function AddUser() {
                                 
                             </div>
                 </div> 
-                <Sidebar />
             </div>
             
             {/* <div>

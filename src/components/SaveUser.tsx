@@ -12,6 +12,10 @@ export default function saveUser() {
 
     console.log("user deatils ===>"+userDetails);
 
+    function backButton() {
+      navigate(-1);
+    }
+
     return(
         
         <div id="wrapper">
@@ -20,7 +24,7 @@ export default function saveUser() {
 								<header id="header">
 									<ul className="icons">
 										<li><a href="#" className="icon"><i className="fa fa-language" aria-hidden="true"></i></a></li>
-										
+										<li><Button onClick={()=> backButton()}> Back </Button></li>
 									</ul>
 								</header>
 
@@ -163,8 +167,7 @@ export default function saveUser() {
 							
 						</section>
                     </div>
-				<Sidebar/>
-
+				
 		</div>        
        
     )

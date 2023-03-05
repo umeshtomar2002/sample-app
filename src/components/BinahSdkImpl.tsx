@@ -5,6 +5,9 @@ import SettingsBars from './SettingsBars';
 import { Flex } from './shared/Flex';
 import { useCameras, useDisableZoom } from '../hooks';
 import UAParser from 'ua-parser-js';
+import Sidebar from './Sidebar';
+import { Button } from 'antd';
+import {useNavigate} from "react-router-dom";
 
 const Container = styled(Flex)<{ isSettingsOpen: boolean }>`
   height: 100%;
@@ -18,6 +21,7 @@ const Container = styled(Flex)<{ isSettingsOpen: boolean }>`
 `;
 
 const BinahSdkImpl = () => {
+  let navigate = useNavigate();
   const cameras = useCameras();
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [cameraId, setCameraId] = useState<string>();
@@ -64,22 +68,39 @@ const BinahSdkImpl = () => {
     setCameraId(cameras[0].deviceId);
   }, [cameras]);
 
+  function backButton() {
+    navigate(-1)
+  }
+
   return (
-    <Container isSettingsOpen={isSettingsOpen}>
-      <BinahMonitor
-        showMonitor={!(isMobile && isSettingsOpen)}
-        cameraId={cameraId}
-        onLicenseStatus={updateLicenseStatus}
-        onSettingsClick={toggleSettingsClick}
-        isSettingsOpen={isSettingsOpen}
-      />
-      <SettingsBars
-        open={isSettingsOpen}
-        onClose={handleCloseSettings}
-        cameras={cameras}
-        isLicenseValid={isLicenseValid}
-      />
-    </Container>
+    <div id="wrapper">
+      <div id="main"> 
+          <div className="inner">
+          <header id="header">
+							<ul className="icons">
+								<li><a href="#" className="icon"><i className="fa fa-language" aria-hidden="true"></i></a></li>
+                                <li><Button onClick={()=> backButton()}> Reset </Button></li>
+							</ul>
+						</header>
+           </div> 
+           </div>
+      <Container isSettingsOpen={isSettingsOpen}> 
+        <BinahMonitor
+          showMonitor={!(isMobile && isSettingsOpen)}
+          cameraId={cameraId}
+          onLicenseStatus={updateLicenseStatus}
+          onSettingsClick={toggleSettingsClick}
+          isSettingsOpen={isSettingsOpen}
+        />
+        <SettingsBars
+          open={isSettingsOpen}
+          onClose={handleCloseSettings}
+          cameras={cameras}
+          isLicenseValid={isLicenseValid}
+        />
+      </Container>
+      <Sidebar />
+    </div>
   );
 };
 

@@ -35,6 +35,7 @@ import Loader from './Loader';
 import { VideoReadyState } from '../types';
 import TopBar from './TopBar';
 import Mask from '../assets/mask.svg';
+import {Navigate} from "react-router-dom";
 
 const MonitorWrapper = styled(Flex)<{ isSettingsOpen: boolean }>`
   flex-direction: column;
@@ -257,6 +258,7 @@ const BinahMonitor = ({
                 isMobile={isMobile()}
               />
             </VideoWrapper>
+             {console.log("is Measuring ==== "+isMeasuring())}
             {(isMeasuring()
               ? !errorMessage && !warningMessage
               : !errorMessage) &&
@@ -264,6 +266,8 @@ const BinahMonitor = ({
             <ErrorAlert message={errorMessage} />
             {isMeasuring() && <WarningAlert message={warningMessage} />}
             {isMeasuring() && <InfoAlert message={info.message} />}
+            {sessionState === SessionState.STOPPING && console.log("Stop =====> " + JSON.stringify(vitalSigns) )}
+            {sessionState === SessionState.STOPPING &&  <Navigate to="/viewReport" state={vitalSigns} replace={true} />}            
             {!isVideoReady() && licenseKey && <Loader />}
           </VideoAndStatsWrapper>
           <ButtomTimerWrapper>

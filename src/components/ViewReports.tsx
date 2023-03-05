@@ -4,13 +4,21 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import  "../assets/css/main.css";
+import { useLocation } from "react-router-dom";
 
 export default function viewReport() { 
 
     let navigate = useNavigate();
+    let location = useLocation()
+    console.log(JSON.stringify(location.state));
+    console.log(location.state.heartRate.value);
     const padingStyle = {        
         paddingBottem: '10px',
      }
+    function backButton() {
+        navigate(-2);
+    }
+
     return(
         <>
             <div id="wrapper">
@@ -19,15 +27,40 @@ export default function viewReport() {
                         <header id="header">
 							<ul className="icons">
 								<li><a href="#" className="icon"><i className="fa fa-language" aria-hidden="true"></i></a></li>
+                                <li><Button onClick={()=> backButton()}> Back </Button></li>
+
 							</ul>
 						</header>
                         <section id="inside">
+                            <div className="content">
+                                <h2>Curret Report</h2>
+                                <div className="row gtr-uniform">
+                                    <div className="col-8 col-12-xsmall">
+                                         Heart rate :  {location.state.heartRate.value}
+                                    </div>
+                                    <div className="col-8 col-12-xsmall">
+                                        Breathing Rate :  {location.state.breathingRate.value}
+                                    </div>
+                                    <div className="col-8 col-12-xsmall">
+                                        stress :  {location.state.stress.value}
+                                    </div>
+                                    <div className="col-8 col-12-xsmall">
+                                        hrvSdnn :  {location.state.hrvSdnn.value}
+                                    </div>
+                                    <div className="col-8 col-12-xsmall">
+                                        spo2 :  {location.state.spo2.value}
+                                    </div>
+                                    <div className="col-8 col-12-xsmall">
+                                         bloodPressure :  {location.state.bloodPressure.value}
+                                    </div>
+                                </div>      
+                            </div>
 							<div className="content">
 								<header>
 									<h2>View Reports</h2>
 									<p>Enter your details to view reports</p>
 								</header>
-                            </div>
+                            </div>                            
                             <Formik  initialValues={{ member:'',report:''}}
                                      onSubmit={(values,  {setSubmitting}) => {
                                             navigate('/addUser',{state:{id:1,name:'sabaoon'}});
@@ -98,7 +131,6 @@ export default function viewReport() {
                         </section>        
                     </div>
                 </div>
-                <Sidebar />
             </div>
         </>
     )

@@ -80,15 +80,14 @@ export default function Login(){
                 </div>
             </div>
 
-            {/* <div>
-                
+            {/* <div>                
                 <h1> Login</h1>
                 <Link to="/addUser">Add  User </Link>
                 <Link to="/saveuser">Save  User </Link>
                 <Link to="/viewReport">Reports</Link>
                 <Link to="/performTest">performTest</Link>
-                                
-            </div> */}
+                <Link to="/binah">performTest</Link>                              
+            </div>  */}
 
             </>
         )
