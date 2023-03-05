@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import Helmet from "react-helmet";
 import MenuBack from '../assets/images/menu_back.svg';
 import LogoImage from  '../assets/images/Logo.svg';
@@ -7,6 +7,7 @@ import ScanSvg from'../assets/images/scan.svg';
 import ReportSvg from'../assets/images/report.svg';
 import LogoutSvg from'../assets/images/logout.svg';
 import { useNavigate } from "react-router-dom";
+import jQuery from 'jquery';
 
 
 export default function sidebar(){
@@ -24,8 +25,7 @@ export default function sidebar(){
         navigate('/addUser');
     }
 
-    return(
-        <>
+    useEffect(() => {
             <Helmet>            
                 <script type = "text/javascript" src="../src/assets/js/jquery.min.js"/>
                 <script type = "text/javascript" src="../src/assets/js/browser.min.js"/>
@@ -33,6 +33,11 @@ export default function sidebar(){
                 <script type = "text/javascript" src="../src/assets/js/util.js"/>
                 <script type = "text/javascript" src="../src/assets/js/main.js"/>
            </Helmet>
+      });
+
+    return(
+        <>
+            
          <div id="sidebar">
                 <div className="inner">
                     
