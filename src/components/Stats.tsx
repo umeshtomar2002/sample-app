@@ -38,6 +38,21 @@ interface IStats {
     hrvSdnn: VitalSign<number>;
     spo2: VitalSign<number>;
     bloodPressure: VitalSign<BloodPressureValue>;
+    oxygenSaturation: VitalSign<number>; 
+    stressIndex: VitalSign<number>;    
+    meanRri: VitalSign<number>;
+    rmssd: VitalSign<number>;
+    sd1: VitalSign<number>;
+    sd2: VitalSign<number>;
+    prq: VitalSign<number>;
+    pnsIndex: VitalSign<number>;
+    pnsZone: VitalSign<number>;
+    snsIndex: VitalSign<number>;
+    snsZone: VitalSign<number>;
+    wellnessLevel: VitalSign<number>;
+    wellnessIndex: VitalSign<number>;
+    lfhf: VitalSign<number>;
+    hemoglobinSign:VitalSign<number>;
   };
 }
 

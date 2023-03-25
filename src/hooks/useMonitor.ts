@@ -224,6 +224,66 @@ const useMonitor = (
         value: vitalSigns?.bloodPressure?.value,
         isEnabled: enabledVitalSigns?.isEnabledBloodPressure,
       },
+      oxygenSaturation:{
+        value: vitalSigns?.oxygenSaturation?.value,
+        isEnabled: enabledVitalSigns?.isEnabledBloodPressure,
+      },
+      stressIndex:{
+        value: vitalSigns?.stressIndex?.value,
+        isEnabled: enabledVitalSigns?.isEnabledStressIndex,
+      },   
+      meanRri: {
+        value: vitalSigns?.meanRri?.value,
+        isEnabled: enabledVitalSigns?.isEnabledMeanRri,
+      },
+      rmssd: {
+        value: vitalSigns?.rmssd?.value,
+        isEnabled: enabledVitalSigns?.isEnabledRmssd,
+      },
+      sd1: {
+        value: vitalSigns?.sd1?.value,
+        isEnabled: enabledVitalSigns?.isEnabledSd1,
+      },
+      sd2: {
+        value: vitalSigns?.sd2?.value,
+        isEnabled: enabledVitalSigns?.isEnabledSd2,
+      },
+      prq: {
+        value: vitalSigns?.prq?.value,
+        isEnabled: enabledVitalSigns?.isEnabledPrq,
+      },
+      pnsIndex: {
+        value: vitalSigns?.pnsIndex?.value,
+        isEnabled: enabledVitalSigns?.isEnabledPnsIndex,
+      },
+      pnsZone: {
+        value: vitalSigns?.pnsZone?.value,
+        isEnabled: enabledVitalSigns?.isEnabledPnsZone,
+      },
+      snsIndex: {
+        value: vitalSigns?.snsIndex?.value,
+        isEnabled: enabledVitalSigns?.isEnabledSnsIndex,
+      },
+      snsZone: {
+        value: vitalSigns?.snsZone?.value,
+        isEnabled: enabledVitalSigns?.isEnabledSnsZone,
+      },
+      wellnessLevel: {
+        value: vitalSigns?.wellnessLevel?.value,
+        isEnabled: enabledVitalSigns?.isEnabledBloodPressure,
+      },
+      wellnessIndex: {
+        value: vitalSigns?.wellnessIndex?.value,
+        isEnabled: enabledVitalSigns?.isEnabledWellnessLevel,
+      },
+      lfhf:{
+        value: vitalSigns?.lfhf?.value,
+        isEnabled: enabledVitalSigns?.isEnabledWellnessIndex,
+      },
+      hemoglobinSign:{
+        value: vitalSigns?.hemoglobinSign?.value,
+        isEnabled: enabledVitalSigns?.isEnabledLfhf,
+      },
     },
     offlineMeasurements,
     error,

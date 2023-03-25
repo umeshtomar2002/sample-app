@@ -4,6 +4,7 @@ import BinahSdkImpl from './components/BinahSdkImpl';
 import App from './components/App';
 import GlobalStyle from './style/global';
 import styled from 'styled-components';
+import { BrowserRouter } from 'react-router-dom';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -11,9 +12,11 @@ const Wrapper = styled.div`
 `;
 
 ReactDOM.render(
-  <Wrapper>
-    <GlobalStyle />
-    <App />
-  </Wrapper>,
+   <React.StrictMode>
+    <BrowserRouter>
+      <GlobalStyle />
+      <App />
+  </BrowserRouter>
+  </React.StrictMode>,
   document.getElementById('root'),
 );
