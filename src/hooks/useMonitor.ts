@@ -37,7 +37,7 @@ const useMonitor = (
     OfflineMeasurements
   >();
   const [vitalSigns, setVitalSigns] = useState<VitalSigns | null>();
-
+  const [vitalSignsResults, setVitalSignsResults] = useState<VitalSignsResults | null>();
   const [error, setError] = useState<AlertData>({ code: -1 });
   const [warning, setWarning] = useState<AlertData>({ code: -1 });
   const [info, setInfo] = useState<InfoData>({ type: InfoType.NONE });
@@ -68,10 +68,13 @@ const useMonitor = (
 
   const onVitalSign = useCallback((vitalSign: VitalSigns) => {
     updateVitalSigns(vitalSign);
+    console.log("vitalSignsResults ====> " +  vitalSign);
   }, []);
 
   const onFinalResults = useCallback((vitalSignsResults: VitalSignsResults) => {
     updateVitalSigns(vitalSignsResults.results);
+    console.log("vitalSignsResults ====> " +  JSON.stringify(vitalSignsResults));
+    setVitalSignsResults(vitalSignsResults);
   }, []);
 
   const onError = (errorData: AlertData) => {

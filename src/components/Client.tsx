@@ -80,3 +80,34 @@ export const saveUserDetails= (userDetails) => fetch(url+'/api/addFamily',{
 export const getloginUserDetails = () => {    
     return JSON.parse(localStorage.getItem('biUser')).userId;
 }
+
+export const saveHealthData= (userDetails) => fetch(url+'/api/saveReport',{
+    headers:{
+        'Content-Type':'application/json',
+        'x-access-token': localStorage.getItem('x-access-token')
+    },
+    method:'POST',
+    body: JSON.stringify(userDetails)
+}).then(healthSaveCheck);
+
+function healthSaveCheck(response:any) {    
+    if (response.ok) {       
+        return response;
+    } else{
+         let error = new Error(response.statusText);
+        // // error.response = response;
+        // // response.json().then(e => {            
+        // //     error.error = e;
+        // // });
+         return Promise.reject(error);
+    }
+}
+
+export const getHealthData = (health) =>fetch(url+'/api/getReports',{
+    headers:{
+        'Content-Type':'application/json',
+        'x-access-token': localStorage.getItem('x-access-token')
+    },
+    method:'POST',
+    body: JSON.stringify(health)
+}).then(healthSaveCheck);

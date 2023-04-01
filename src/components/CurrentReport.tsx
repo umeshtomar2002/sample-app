@@ -1,5 +1,4 @@
-import { Button } from "antd";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import  "../assets/css/main.css";
 import "../assets/css/current-report.css";
@@ -16,6 +15,8 @@ import RecoveryAblity  from "../assets/images/Recovery-Ability.svg";
 import StressResponse  from "../assets/images/Stress-Response.svg";
 import HRVSDNN  from "../assets/images/HRV-SDNN.svg";
 import SidebarNew from "./SidebarNew";
+import { type } from "os";
+import { getHealthData, saveHealthData } from "./Client";
 
 
 export default function currentReport() {
@@ -24,12 +25,103 @@ export default function currentReport() {
     let location = useLocation()
     console.log(JSON.stringify(location.state));
     //console.log(location.state.heartRate.value);
-    
-    function backButton() {
-        navigate(-2);
+   
+    function binahPage() {
+        navigate('/binah'); 
     }
- 
-    const checkUndefined = (test) => test !== undefined && test != ''&& test.length > 0 ? test.value : 'N/A';
+
+    function CurrentDatetime(){
+        const date = new Date();
+        const datela = date.getDate() +'/'+(date.getMonth() +1) +'/'+date.getFullYear();
+        const showTime = date.getHours() 
+            + ':' + date.getMinutes();
+      
+        return (
+            <p><strong>Report on :</strong> {datela} | {showTime}</p>
+        );
+    }
+
+    const calcDate = (days:number) => {
+        var date = new Date();
+        date.setDate(date.getDate() - days);
+        return date.getFullYear() +'-'+(date.getMonth() +1)+'-'+date.getDate();
+    }    
+
+    type genericObj = {
+        familyId?:string,							
+        bloodPressure?:string,   
+        breathingRate?:string,   
+        heartRate?: string,      
+        hemoglobinSign?:string,  
+        hrvSdnn?:string,         
+        lfhf?:string,            
+        meanRri?:string,         
+        oxygenSaturation?:string,
+        pnsIndex?:string,        
+        pnsZone?:string,         
+        prq?:string,             
+        rmssd?:string,           
+        sd1?:string,             
+        sd2?:string,             
+        sdnn?:string,            
+        snsIndex?:string,        
+        snsZone?:string,         
+        spo2?: string,           
+        stress?:string,          
+        stressIndex?:string,     
+        stressLevel?:string,     
+        wellnessIndex?:string,   
+        wellnessLevel?:string    
+    };                           
+    
+        const healthList = [];
+
+        if(location.state.page == 'binah'){
+            const value:genericObj = {
+                familyId:"4",
+                bloodPressure : location.state.data.bloodPressure != null && location.state.data.bloodPressure != undefined && location.state.data.bloodPressure.value !=null? location.state.data.bloodPressure.value : 'N/A',
+                breathingRate : location.state.data.breathingRate != null && location.state.data.breathingRate != undefined && location.state.data.breathingRate.value !=null? location.state.data.breathingRate.value : 'N/A',   
+                heartRate : location.state.data.heartRate != null && location.state.data.heartRate != undefined && location.state.data.heartRate.value !=null? location.state.data.heartRate.value : 'N/A',      
+                hemoglobinSign : location.state.data.hemoglobinSign != null && location.state.data.hemoglobinSign != undefined && location.state.data.hemoglobinSign.value !=null? location.state.data.hemoglobinSign.value : 'N/A',  
+                hrvSdnn : location.state.data.hrvSdnn != null && location.state.data.hrvSdnn != undefined && location.state.data.hrvSdnn.value !=null? location.state.data.hrvSdnn.value : 'N/A',         
+                lfhf : location.state.data.lfhf != null && location.state.data.lfhf != undefined && location.state.data.lfhf.value !=null? location.state.data.lfhf.value : 'N/A',            
+                meanRri : location.state.data.meanRri != null && location.state.data.meanRri != undefined && location.state.data.meanRri.value !=null? location.state.data.meanRri.value : 'N/A',         
+                oxygenSaturation: location.state.data.oxygenSaturation != null && location.state.data.oxygenSaturation != undefined && location.state.data.oxygenSaturation.value !=null? location.state.data.oxygenSaturation.value : 'N/A',
+                pnsIndex: location.state.data.pnsIndex != null && location.state.data.pnsIndex != undefined && location.state.data.pnsIndex.value !=null? location.state.data.pnsIndex.value : 'N/A',        
+                pnsZone:  location.state.data.pnsZone != null && location.state.data.pnsZone != undefined && location.state.data.pnsZone.value !=null? location.state.data.pnsZone.value : 'N/A',         
+                prq: location.state.data.prq != null && location.state.data.prq != undefined && location.state.data.prq.value !=null? location.state.data.prq.value : 'N/A',             
+                rmssd: location.state.data.rmssd != null && location.state.data.rmssd != undefined && location.state.data.rmssd.value !=null? location.state.data.rmssd.value : 'N/A',           
+                sd1: location.state.data.sd1 != null && location.state.data.sd1 != undefined && location.state.data.sd1.value !=null? location.state.data.sd1.value : 'N/A',             
+                sd2: location.state.data.sd2 != null && location.state.data.sd2 != undefined && location.state.data.sd2.value !=null? location.state.data.sd2.value : 'N/A',             
+                sdnn: location.state.data.sdnn != null && location.state.data.sdnn != undefined && location.state.data.sdnn.value !=null? location.state.data.sdnn.value : 'N/A',            
+                snsIndex: location.state.data.snsIndex != null && location.state.data.snsIndex != undefined && location.state.data.snsIndex.value !=null? location.state.data.snsIndex.value : 'N/A',        
+                snsZone: location.state.data.snsZone != null && location.state.data.snsZone != undefined && location.state.data.snsZone.value !=null? location.state.data.snsZone.value : 'N/A',
+                stress: location.state.data.stress != null && location.state.data.stress != undefined && location.state.data.stress.value !=null? location.state.data.stress.value : 'N/A',          
+                stressIndex: location.state.data.stressIndex != null && location.state.data.stressIndex != undefined && location.state.data.stressIndex.value !=null? location.state.data.stressIndex.value : 'N/A',     
+                stressLevel: location.state.data.stressLevel != null && location.state.data.stressLevel != undefined && location.state.data.stressLevel.value !=null? location.state.data.stressLevel.value : 'N/A',     
+                wellnessIndex: location.state.data.wellnessIndex != null && location.state.data.wellnessIndex != undefined && location.state.data.wellnessIndex.value !=null? location.state.data.wellnessIndex.value : 'N/A',   
+                wellnessLevel: location.state.data.wellnessLevel != null && location.state.data.wellnessLevel != undefined && location.state.data.wellnessLevel.value !=null? location.state.data.wellnessLevel.value : 'N/A', 
+            }
+            healthList.push(value);
+            console.log(JSON.stringify(value));
+            useEffect(() => {
+                saveHealthData(value)
+                .then(res =>{console.log("success=>"+res)}).catch(err=> {console.log("error => "+err)});
+               }, [])
+        }
+
+
+        if(location.state.page == 'viewReport'){
+            const data ={
+                familyId:location.state.data.member,
+                fromDate:calcDate(location.state.data.report),
+                toDate:calcDate(0),
+            }
+            useEffect(() => {
+                getHealthData(data).then(res=>{"succ=>"+res}).catch(err=>console.log("err=>"+err));
+            }, [])   
+        }
+
 
     return(
         <>
@@ -39,7 +131,7 @@ export default function currentReport() {
                         
                         <section id="banner">
                             <div className="content">
-                            <p><strong>Report on :</strong> 21/03/2023  | 00:24</p>
+                            <CurrentDatetime/>
 
                             <div className="score"> 
                                 <div className="meter"> 
@@ -73,91 +165,27 @@ export default function currentReport() {
                             </div>
                             
                             <ul className="result">
-                                <li><p className="r-icon"><img src={Heartrate}/> Heart Rate</p><p><strong>{checkUndefined(location.state.heartRate)}</strong></p></li>
-                                <li><p className="r-icon"><img src={Breathrate}/> Breathing Rate</p><p><strong>{checkUndefined(location.state.breathingRate)}</strong></p></li>
-                                <li><p className="r-icon"><img src={PQR}/> PRQ</p><p><strong>{checkUndefined(location.state.prq)}</strong></p></li>
-                                <li><p className="r-icon"><img src={SpO2}/> Oxygen Saturation</p><p><strong>{checkUndefined(location.state.spo2)}</strong></p></li>
-                                <li><p className="r-icon"> Blood Pressure</p><p><strong>{checkUndefined(location.state.bloodPressure)}</strong></p></li>
-                                <li><p className="r-icon"><img src={Hemoglobin}/> Hemoglobin</p><p><strong>{checkUndefined(location.state.hemoglobinSign)}</strong></p></li>
-                                <li><p className="r-icon"><img src={HemoglobinA1c}/> Hemoglobin A1c</p><p><strong>{checkUndefined(location.state.hemoglobinSign)}</strong></p></li>
-                                <li><p className="r-icon"><img src={StressLevel}/> Stress Level</p><p><strong>{checkUndefined(location.state.stressLevel)}</strong></p></li>
-                                <li><p className="r-icon"><img src={RecoveryAblity}/> Recovery Ability</p><p><strong>N/A</strong></p></li>
-                                {/* <li><p class="r-icon"><img src="images/Stress-Response.svg"> Stress Response</p><p><strong>N/A</strong></p></li> */}
-                                <li><p className="r-icon"><img src={HRVSDNN}/> HRV-SDNN</p><p><strong>{checkUndefined(location.state.hrvSdnn)}</strong></p></li>											
+
+                            {healthList.map((d:genericObj,id:any)=>{
+                                    return(
+                                            <> 
+                                                <li><p className="r-icon"><img src={Heartrate}/> Heart Rate</p><p><strong>{d.heartRate}</strong></p></li>
+                                                <li><p className="r-icon"><img src={Breathrate}/> Breathing Rate</p><p><strong>{d.breathingRate}</strong></p></li>
+                                                <li><p className="r-icon"><img src={PQR}/> PRQ</p><p><strong>{d.prq}</strong></p></li>
+                                                <li><p className="r-icon"><img src={SpO2}/> Oxygen Saturation</p><p><strong>{d.spo2}</strong></p></li>
+                                                <li><p className="r-icon"> Blood Pressure</p><p><strong>{d.bloodPressure}</strong></p></li>
+                                                <li><p className="r-icon"><img src={Hemoglobin}/> Hemoglobin</p><p><strong>{d.hemoglobinSign}</strong></p></li>
+                                                <li><p className="r-icon"><img src={HemoglobinA1c}/> Hemoglobin A1c</p><p><strong>{d.hemoglobinSign}</strong></p></li>
+                                                <li><p className="r-icon"><img src={StressLevel}/> Stress Level</p><p><strong>{d.stressLevel}</strong></p></li>
+                                                <li><p className="r-icon"><img src={RecoveryAblity}/> Recovery Ability</p><p><strong>N/A</strong></p></li>
+                                                <li><p className="r-icon"><img src={HRVSDNN}/> HRV-SDNN</p><p><strong>{d.hrvSdnn}</strong></p></li>
+                                            </>
+                                )})}
+
+                                											
 							</ul>
-                            <p className="clear text-center"><a href="#" className="button   icon solid fa-share"> Share</a> &nbsp; <a href="#" className="button primary "> Test Again</a></p>
-                            {/* <header>
-                                <h2>Current Report</h2>
-                            </header>
-                                <div> </div>    
-                                <div className="row gtr-uniform">
-                                    <div className="col-8 col-12-xsmall">
-                                         Heart Rate :  {checkUndefined(location.state.heartRate)}
-                                    </div>
-                                    <div className="col-8 col-12-xsmall">
-                                        Breathing Rate :  {checkUndefined(location.state.breathingRate)}
-                                    </div>
-                                    <div className="col-8 col-12-xsmall">
-                                        Stress :  {checkUndefined(location.state.stress)}
-                                    </div>
-                                    <div className="col-8 col-12-xsmall">
-                                       HRV-SDNN :  {checkUndefined(location.state.hrvSdnn)}
-                                    </div>
-                                    <div className="col-8 col-12-xsmall">
-                                        Spo2 :  {checkUndefined(location.state.spo2)}
-                                    </div>
-                                    <div className="col-8 col-12-xsmall">
-                                         Blood Pressure :  {checkUndefined(location.state.bloodPressure)}
-                                    </div>
-                                    <div className="col-8 col-12-xsmall">
-                                        sdnn :  {checkUndefined(location.state.sdnn)}
-                                    </div>
-                                    <div className="col-8 col-12-xsmall">
-                                        stressLevel :  {checkUndefined(location.state.stressLevel)}
-                                    </div>
-                                    <div className="col-8 col-12-xsmall">
-                                        stressIndex :  {checkUndefined(location.state.stressIndex)}
-                                    </div>
-                                    <div className="col-8 col-12-xsmall">
-                                        meanRri :  {checkUndefined(location.state.meanRri)}
-                                    </div>
-                                    <div className="col-8 col-12-xsmall">
-                                        rmssd :  {checkUndefined(location.state.rmssd)}
-                                    </div>
-                                    <div className="col-8 col-12-xsmall">
-                                        sd1 :  {checkUndefined(location.state.sd1)}
-                                    </div>
-                                    <div className="col-8 col-12-xsmall">
-                                        sd2 :  {checkUndefined(location.state.sd2)}
-                                    </div>
-                                    <div className="col-8 col-12-xsmall">
-                                        prq :  {checkUndefined(location.state.prq)}
-                                    </div><div className="col-8 col-12-xsmall">
-                                        pnsIndex :  {checkUndefined(location.state.pnsIndex)}
-                                    </div>
-                                    <div className="col-8 col-12-xsmall">
-                                        pnsZone :  {checkUndefined(location.state.pnsZone)}
-                                    </div>
-                                    <div className="col-8 col-12-xsmall">
-                                        snsIndex :  {checkUndefined(location.state.snsIndex)}
-                                    </div>
-                                    <div className="col-8 col-12-xsmall">
-                                        snsZone :  {checkUndefined(location.state.snsZone)}
-                                    </div>
-                                    <div className="col-8 col-12-xsmall">
-                                        wellnessLevel :  {checkUndefined(location.state.wellnessLevel)}
-                                    </div>
-                                    <div className="col-8 col-12-xsmall">
-                                        wellnessIndex :  {checkUndefined(location.state.wellnessIndex)}
-                                    </div>
-                                    <div className="col-8 col-12-xsmall">
-                                        lfhf :  {checkUndefined(location.state.lfhf)}
-                                    </div>
-                                    <div className="col-8 col-12-xsmall">
-                                        hemoglobinSign :  {checkUndefined(location.state.hemoglobinSign)}
-                                    </div>
-                                </div>      
-                            							  */}</div>
+                            <p className="clear text-center"><a href="#" className="button   icon solid fa-share"> Share</a> &nbsp; <a href="#" className="button primary" onClick={()=>binahPage()}> Test Again</a></p>
+                           </div>
                         </section>        
                     </div></div> 
                 <SidebarNew /> 
@@ -166,3 +194,4 @@ export default function currentReport() {
     )
 
 }
+

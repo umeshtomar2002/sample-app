@@ -88,7 +88,7 @@ const BinahSdkImpl = () => {
                       </header>
                       <article className="align-center">
                         <a href="#" className="image align-center"><img src="images/pic06.jpg"  alt=""/></a>
-                        <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+                        {/* <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p> */}
                       </article>								
 											
 										</div>

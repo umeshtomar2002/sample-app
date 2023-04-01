@@ -25,6 +25,12 @@ export default function viewReport() {
         getfamilyDetails(userDetails).then(res => res.json().then(family1 => {setFamily(family1.data)}));               
         }, []);
 
+    const calcDate = (days:number) => {
+        var date = new Date();
+        date.setDate(date.getDate() - days);
+        return date.getFullYear() +'-'+date.getMonth()+'-'+date.getDay();
+    }        
+
     return(
         <>
             <div id="wrapper">            
@@ -59,8 +65,9 @@ export default function viewReport() {
                                         return errors;
                                         }}
                                      onSubmit={(values,  {setSubmitting}) => {
+                                            let state ={page:'viewReport',data:values} 
                                             console.log(JSON.stringify(values));
-                                            //navigate('/addUser',{state:{id:1,name:'sabaoon'}});
+                                            navigate('/currentReport',{state});
                                         }}>
                                             {({
                                                 values,
