@@ -168,6 +168,7 @@ const BinahMonitor = ({
     error,
     warning,
     info,
+    isFinalResultsCaptured
   } = useMonitor(
     video,
     cameraId,
@@ -258,7 +259,7 @@ const BinahMonitor = ({
                 isMobile={isMobile()}
               />
             </VideoWrapper>
-             {console.log("is Measuring ==== "+isMeasuring())}
+             {/* {console.log("is Measuring ==== "+isMeasuring())} */}
             {(isMeasuring()
               ? !errorMessage && !warningMessage
               : !errorMessage) &&
@@ -266,8 +267,8 @@ const BinahMonitor = ({
             <ErrorAlert message={errorMessage} />
             {isMeasuring() && <WarningAlert message={warningMessage} />}
             {isMeasuring() && <InfoAlert message={info.message} />}
-            {sessionState === SessionState.STOPPING && console.log("Stop =====> " + JSON.stringify(vitalSigns) )}
-            {sessionState === SessionState.STOPPING &&  <Navigate to="/currentReport" state={{page:"binah",data:vitalSigns}} replace={true} />}            
+            {sessionState === SessionState.STOPPING && isFinalResultsCaptured && console.log("Stop =====> " + JSON.stringify(vitalSigns) )}
+            {sessionState === SessionState.STOPPING && isFinalResultsCaptured && <Navigate to="/currentReport" state={{page:"binah",data:vitalSigns}} replace={true} />}            
             {!isVideoReady() && licenseKey && <Loader />}
           </VideoAndStatsWrapper>
           <ButtomTimerWrapper>

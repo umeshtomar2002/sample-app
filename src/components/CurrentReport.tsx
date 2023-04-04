@@ -23,7 +23,7 @@ export default function currentReport() {
 
     let navigate = useNavigate();
     let location = useLocation()
-    console.log(JSON.stringify(location.state));
+    console.log(JSON.stringify("location.state :::: "+location.state));
     //console.log(location.state.heartRate.value);
    
     function binahPage() {
@@ -106,7 +106,7 @@ export default function currentReport() {
             console.log(JSON.stringify(value));
             useEffect(() => {
                 saveHealthData(value)
-                .then(res =>{console.log("success=>"+res)}).catch(err=> {console.log("error => "+err)});
+                .then(res =>{console.log("success=>"+JSON.stringify(res))}).catch(err=> {console.log("error => "+err)});
                }, [])
         }
 

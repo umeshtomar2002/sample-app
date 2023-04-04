@@ -29,6 +29,7 @@ const useMonitor = (
 ) => {
   const [session, setSession] = useState<HealthMonitorSession>();
   const [sessionState, setSessionState] = useState<SessionState>();
+  const [isFinalResultsCaptured, setIsFinalResultsCaptured] = useState<boolean>(false);
   const [isMonitorReady, setIsMonitorReady] = useState<boolean>();
   const [enabledVitalSigns, setEnabledVitalSigns] = useState<
     EnabledVitalSigns
@@ -68,13 +69,13 @@ const useMonitor = (
 
   const onVitalSign = useCallback((vitalSign: VitalSigns) => {
     updateVitalSigns(vitalSign);
-    console.log("vitalSignsResults ====> " +  vitalSign);
   }, []);
 
   const onFinalResults = useCallback((vitalSignsResults: VitalSignsResults) => {
-    updateVitalSigns(vitalSignsResults.results);
-    console.log("vitalSignsResults ====> " +  JSON.stringify(vitalSignsResults));
+    updateVitalSigns(vitalSignsResults.results);    
     setVitalSignsResults(vitalSignsResults);
+    setIsFinalResultsCaptured(true)
+    console.log("final All vital Signs :::", JSON.stringify(vitalSignsResults))
   }, []);
 
   const onError = (errorData: AlertData) => {
@@ -284,7 +285,7 @@ const useMonitor = (
         isEnabled: enabledVitalSigns?.isEnabledWellnessIndex,
       },
       hemoglobinSign:{
-        value: vitalSigns?.hemoglobinSign?.value,
+        value: vitalSigns?.hemoglobin?.value,
         isEnabled: enabledVitalSigns?.isEnabledLfhf,
       },
     },
@@ -292,6 +293,7 @@ const useMonitor = (
     error,
     warning,
     info,
+    isFinalResultsCaptured
   };
 };
 

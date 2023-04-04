@@ -18,7 +18,7 @@ export default function saveUser() {
 
     const[details,setDetails] = useState(userDetails.state != null && userDetails.state != ''? userDetails.state.data : '')
 
-    console.log("details =====> " +details);
+    console.log("details =====> " +JSON.stringify(details));
 
     const checkData = (feild:string) => {
         switch(feild) {
@@ -84,6 +84,19 @@ export default function saveUser() {
     return age;
     }
 
+    const getInitialValues = () => {
+      return {
+        fullname:'Rajesh Singh',
+        email: '', 
+        mobile: '',
+        dob:'14-01-1987',
+        gender:'',
+        weight:'',
+        height:'',
+        userId:''
+      }
+    }
+
    
     return(
         
@@ -104,7 +117,7 @@ export default function saveUser() {
 											<h2>A bit about your Family/Friend</h2>
 											<span>Share some personal information about you</span>
 										</header>
-                                            <Formik  initialValues={{ fullname:'Umesh Singh',email: '', mobile: '',dob:'14-01-1987',gender:'',weight:'',height:'',userId:''}}
+                                            <Formik  initialValues={getInitialValues()}
                                                     validate={values => {
                                                         type ErrorT = {
                                                             fullname?:string;
