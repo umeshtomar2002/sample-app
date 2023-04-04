@@ -15,7 +15,6 @@ import RecoveryAblity  from "../assets/images/Recovery-Ability.svg";
 import StressResponse  from "../assets/images/Stress-Response.svg";
 import HRVSDNN  from "../assets/images/HRV-SDNN.svg";
 import SidebarNew from "./SidebarNew";
-import { type } from "os";
 import { getHealthData, saveHealthData } from "./Client";
 
 
@@ -177,8 +176,10 @@ export default function currentReport() {
                                                 <li><p className="r-icon"><img src={Hemoglobin}/> Hemoglobin</p><p><strong>{d.hemoglobinSign}</strong></p></li>
                                                 <li><p className="r-icon"><img src={HemoglobinA1c}/> Hemoglobin A1c</p><p><strong>{d.hemoglobinSign}</strong></p></li>
                                                 <li><p className="r-icon"><img src={StressLevel}/> Stress Level</p><p><strong>{d.stressLevel}</strong></p></li>
-                                                <li><p className="r-icon"><img src={RecoveryAblity}/> Recovery Ability</p><p><strong>N/A</strong></p></li>
-                                                <li><p className="r-icon"><img src={HRVSDNN}/> HRV-SDNN</p><p><strong>{d.hrvSdnn}</strong></p></li>
+                                                <li><p className="r-icon"><img src={RecoveryAblity}/> Wellness Index</p><p><strong>{d.wellnessIndex}</strong></p></li>
+                                                <li><p className="r-icon"><img src={HRVSDNN}/> Wellness Level</p><p><strong>{d.wellnessLevel}</strong></p></li>
+                                                {/* <li><p className="r-icon"><img src={RecoveryAblity}/> Recovery Ability</p><p><strong>N/A</strong></p></li> */}
+                                                {/* <li><p className="r-icon"><img src={HRVSDNN}/> HRV-SDNN</p><p><strong>{d.hrvSdnn}</strong></p></li> */}
                                             </>
                                 )})}
 
