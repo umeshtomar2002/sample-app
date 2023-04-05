@@ -31,8 +31,8 @@ export default function performTest(){
                                     <p>Tell us few more details about yourself to generate reports?</p>
                                 </header>
                                 <Formik  initialValues={{ HeartRate:true,BreathingRate: true, PRQRate: true,OxygenRate:true,
-                                                BloodRate:true,HemoglobinRate:true,HbA1cRate:true,StressRate:true,RecoveryRate:true,
-                                                StreeRate:true,HRVRate:true}}
+                                                BloodRate:true,HemoglobinRate:true,HbA1cRate:true,StressRate:true,WellnessIndex:true,
+                                                StreeRate:true,WellnessLevel:true}}
                                                     onSubmit={async (values,  {setSubmitting}) => {
                                                         await new Promise((r) => setTimeout(r, 500));
                                                          alert(JSON.stringify(values, null, 2));
@@ -80,16 +80,24 @@ export default function performTest(){
                                                                 </div>
                                                                 <div className="col-3 col-6-small">
                                                                     <Field type="checkbox" id="Recovery-Rate" name="RecoveryRate"/>
-                                                                    <label htmlFor="Recovery-Rate">Recovery Ability</label>
+                                                                    <label htmlFor="Recovery-Rate">Wellness Index</label>
                                                                 </div>
+                                                                {/* <div className="col-3 col-6-small">
+                                                                    <Field type="checkbox" id="Recovery-Rate" name="RecoveryRate"/>
+                                                                    <label htmlFor="Recovery-Rate">Recovery Ability</label>
+                                                                </div> */}
                                                                 <div className="col-3 col-6-small">
                                                                     <Field type="checkbox" id="Stree-Rate" name="StreeRate"/>
                                                                     <label htmlFor="Stree-Rate">Stress Response</label>
                                                                 </div>
                                                                 <div className="col-3 col-6-small">
                                                                     <Field type="checkbox" id="HRV-Rate" name="HRVRate" />
-                                                                    <label htmlFor="HRV-Rate">HRV-SDNN</label>
+                                                                    <label htmlFor="HRV-Rate">Wellness Level</label>
                                                                 </div>
+                                                                {/* <div className="col-3 col-6-small">
+                                                                    <Field type="checkbox" id="HRV-Rate" name="HRVRate" />
+                                                                    <label htmlFor="HRV-Rate">HRV-SDNN</label>
+                                                                </div> */}
                                                                 <div className="col-3 col-6-small">
                                                                     <Field type="checkbox" id="Hemoglobin-Rate" name="HemoglobinRate"/>
                                                                     <label htmlFor="Hemoglobin-Rate">Hemoglobin</label>

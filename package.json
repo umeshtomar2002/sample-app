@@ -8,7 +8,7 @@
   "dependencies": {
     "@ant-design/icons": "^5.0.1",
     "@babel/runtime": "^7.20.13",
-    "@binah/web-sdk": "file:binah-web-sdk-v4.9.1-8.tgz",
+    "@binah/web-sdk": "file:binah-web-sdk-v4.12.1-8.tgz",
     "@react-navigation/core": "github:react-navigation/core",
     "@react-navigation/stack": "^6.3.16",
     "@types/react-helmet": "^6.1.6",
