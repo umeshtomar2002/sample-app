@@ -56,7 +56,7 @@ export default function saveUser() {
             case 'mobile':
                 return details.mobileNo ? details.mobileNo : ""
             case 'dob':
-                return details.dob ? details.dob : ""
+                return details.dob ? new Date(details.dob).toISOString().split('T')[0] : ""
             case 'gender':
                 return details.gender ? details.gender : ""
             case 'height':
@@ -232,13 +232,21 @@ export default function saveUser() {
                                                 {errors.mobile && touched.mobile && errors.mobile && <Tag style={tagStyle}>{errors.mobile}</Tag>}
                                             </div>
                                             <div className="col-6 col-12-xsmall">
-                                                <DatePicker
+                                                <Input
+                                                    type="date"
+                                                    name="dob"
+                                                    placeholder="Date of birth"
+                                                    onChange={handleChange}
+                                                    onBlur={handleBlur}
+                                                    value={values.dob}
+                                                />
+                                                {/* <DatePicker
                                                     name="dob"
                                                     placeholder="Date of birth"
                                                     onChange={(date, dateString) => { values.dob = dateString }}
                                                     onBlur={handleBlur}
                                                     format="DD-MM-YYYY"
-                                                />
+                                                /> */}
                                                 {errors.dob && touched.dob && errors.dob && <Tag style={tagStyle}>{errors.dob}</Tag>}
                                             </div>
                                             <div id="my-radio-group" className="col-1 col-12-small">Gender</div>
