@@ -1,6 +1,6 @@
 import { Button, Drawer } from "antd";
 import React, { useState } from "react";
-import "../assets/css/sidenew.css"
+import "../assets/css/Sidenew.css"
 import MenuBack from '../assets/images/menu_back.svg';
 import LogoImage from  '../assets/images/Logo.svg';
 import Myprofile from'../assets/images/my_profile.svg';
