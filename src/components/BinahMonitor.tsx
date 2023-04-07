@@ -35,7 +35,7 @@ import Loader from './Loader';
 import { VideoReadyState } from '../types';
 import TopBar from './TopBar';
 import Mask from '../assets/mask.svg';
-import {Navigate} from "react-router-dom";
+import {Navigate, useLocation} from "react-router-dom";
 
 const MonitorWrapper = styled(Flex)<{ isSettingsOpen: boolean }>`
   flex-direction: column;
@@ -161,6 +161,8 @@ const BinahMonitor = ({
   const isMediaTablet = useMediaPredicate('(min-width: 1000px)');
   const [processingTime] = useMeasurementDuration();
   const [licenseKey] = useLicenseKey();
+  let location = useLocation()
+
   const {
     sessionState,
     vitalSigns,
@@ -268,7 +270,7 @@ const BinahMonitor = ({
             {isMeasuring() && <WarningAlert message={warningMessage} />}
             {isMeasuring() && <InfoAlert message={info.message} />}
             {sessionState === SessionState.STOPPING && isFinalResultsCaptured && console.log("Stop =====> " + JSON.stringify(vitalSigns) )}
-            {sessionState === SessionState.STOPPING && isFinalResultsCaptured && <Navigate to="/currentReport" state={{page:"binah",data:vitalSigns}} replace={true} />}            
+            {sessionState === SessionState.STOPPING && isFinalResultsCaptured && <Navigate to="/currentReport" state={{page:"binah",data:vitalSigns, familyId: location.state.familyId}} replace={true} />}            
             {!isVideoReady() && licenseKey && <Loader />}
           </VideoAndStatsWrapper>
           <ButtomTimerWrapper>

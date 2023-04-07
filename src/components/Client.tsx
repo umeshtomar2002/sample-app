@@ -76,6 +76,14 @@ export const saveUserDetails= (userDetails) => fetch(url+'/api/addFamily',{
     body: JSON.stringify(userDetails)
 }).then(checkStatus);
 
+export const updateUserDetails = (userDetails) => fetch(url + '/api/updateProfile', {
+    headers: {
+        'Content-Type': 'application/json',
+        'x-access-token': localStorage.getItem('x-access-token')
+    },
+    method: 'POST',
+    body: JSON.stringify(userDetails)
+}).then(checkStatus);
 
 export const getloginUserDetails = () => {    
     return JSON.parse(localStorage.getItem('biUser')).userId;

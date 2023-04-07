@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "../assets/css/main.css";
 import { Field, Formik } from "formik";
-import { Button, DatePicker, Input, Switch, Tag } from "antd";
-import { getloginUserDetails, saveUserDetails } from "./Client";
+import { Button, Input, Switch, Tag } from "antd";
+import { getloginUserDetails, saveUserDetails, updateUserDetails } from "./Client";
 import SidebarNew from "./SidebarNew";
 
 const tagStyle = { backgroundColor: '#f50' };
@@ -12,59 +12,60 @@ export default function saveUser() {
 
     let userDetails = useLocation();
     let navigate = useNavigate();
+    console.log("userDetails =====> " + JSON.stringify(userDetails));
 
-    console.log("user deatils ===>" + JSON.stringify(userDetails.state != null && userDetails.state != '' ? userDetails.state.data : ''));
+    const [currentDetails, setCurrentDetails] = useState(userDetails.state != null && userDetails.state != '' ? userDetails.state.data : null)
 
-    const [details, setDetails] = useState(userDetails.state != null && userDetails.state != '' ? userDetails.state.data : '')
-
-    console.log("details =====> " + JSON.stringify(details));
+    console.log("currentDetails =====> " + JSON.stringify(currentDetails));
 
     const checkData = (feild: string) => {
         switch (feild) {
             case 'fullname':
-                return !(details.fullName != null && details.fullName != '')
+                return !(currentDetails.fullName != null && currentDetails.fullName != '')
 
             case 'email':
-                return !(details.email != null && details.email != '')
+                return !(currentDetails.email != null && currentDetails.email != '')
 
             case 'mobileNo':
-                return !(details.mobileNo != null && details.mobileNo != '')
+                return !(currentDetails.mobileNo != null && currentDetails.mobileNo != '')
 
             case 'dob':
-                return !(details.dob != null && details.dob != '')
+                return !(currentDetails.dob != null && currentDetails.dob != '')
 
             case 'gender':
-                return !(details.gender != null && details.gender != '')
+                return !(currentDetails.gender != null && currentDetails.gender != '')
 
             case 'height':
-                return !(details.height != null && details.height != '')
+                return !(currentDetails.height != null && currentDetails.height != '')
 
             case 'weight':
-                return !(details.weight != null && details.weight != '')
+                return !(currentDetails.weight != null && currentDetails.weight != '')
 
             default:
                 return false;
         }
     }
 
-    const getData = (feild: string) => {
-        switch (feild) {
+    const getData = (field: string) => {
+        switch (field) {
             case 'fullname':
-                return details.fullname ? details.fullname : ""
+                return currentDetails?.fullname ? currentDetails?.fullname : ""
             case 'email':
-                return details.email ? details.email : ""
-            case 'mobile':
-                return details.mobileNo ? details.mobileNo : ""
+                return currentDetails?.email ? currentDetails?.email : ""
+            case 'mobileNo':
+                return currentDetails?.mobileNo ? currentDetails?.mobileNo : ""
             case 'dob':
-                return details.dob ? new Date(details.dob).toISOString().split('T')[0] : ""
+                return currentDetails?.dob ? new Date(currentDetails?.dob).toISOString().split('T')[0] : ""
             case 'gender':
-                return details.gender ? details.gender : ""
+                return currentDetails?.gender ? currentDetails?.gender : ""
             case 'height':
-                return details.height ? details.height : ""
+                return currentDetails?.height ? currentDetails?.height : ""
             case 'weight':
-                return details.weight ? details.weight : ""
+                return currentDetails?.weight ? currentDetails?.weight : ""
             case 'userId':
-                return details.userId ? details.userId : ""
+                return currentDetails?.userId ? currentDetails?.userId : ""
+            case 'familyId':
+                return currentDetails?.familyId ? currentDetails?.familyId : ""
             default:
                 return false;
         }
@@ -86,16 +87,90 @@ export default function saveUser() {
         let intialValues = {
             fullname: getData("fullname"),
             email: getData("email"),
-            mobile: getData("mobile"),
+            mobileNo: getData("mobileNo"),
             dob: getData("dob"),
             gender: getData("gender"),
             weight: getData("weight"),
             height: getData("height"),
             userId: getData("userId"),
+            familyId:  getData("familyId"),
         };
         console.log("initial data===>" + JSON.stringify(intialValues));
         return intialValues;
     };
+
+    const onSubmitForm = (values) => {
+        //await new Promise((r) => setTimeout(r, 500));                                                        
+        //alert(JSON.stringify(values, null, 2));
+        values.userId = getloginUserDetails();
+        console.log("saveUSERR values::::::" + JSON.stringify(values))
+        console.log("saveUSERR currentDetails::::::" + JSON.stringify(currentDetails))
+        let response = currentDetails ? updateUserDetails(values) : saveUserDetails(values)
+        response.then((res) => {
+            res.json().then(data => console.log(data));
+            navigate('/binah',{state:{familyId:values.familyId}});
+        }).catch(error => {
+            console.log("error =========> " + error.status);
+        })
+    }
+    const validateForm = (values) =>{
+        type ErrorT = {
+            fullname?: string;
+            email?: string;
+            mobileNo?: string;
+            dob?: string;
+            gender?: String;
+            weight?: String;
+            height?: string;
+            userId?: String;
+        }
+        const errors: ErrorT = {};
+        if (!values.email) {
+            errors.email = 'Required';
+        } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
+            errors.email = 'Invalid email address';
+        }
+        if (!values.fullname) {
+            errors.fullname = 'Required';
+        }
+        if (!values.mobileNo) {
+            errors.mobileNo = 'Required';
+        } else if (values.mobileNo.length != 10) {
+            errors.mobileNo = 'mobile number must be 10 digits';
+        }
+        if (!values.dob) {
+            errors.dob = 'Required';
+        } else if (getAge(values.dob) < 18) {
+            errors.dob = 'Date of birth should be greater than 18 years';
+        } else if (getAge(values.dob) > 110) {
+            errors.dob = 'Date of birth should be less than 110 years';
+        }
+        if (!values.height) {
+            errors.height = 'Required';
+        } else if (values.height.includes(".")) {
+            errors.height = "Non decimal number is required";
+        } else if (!Number.isInteger(parseInt(values.height))) {
+            errors.height = "Enter a number";
+        } else if (parseInt(values.height) < 59) {
+            errors.height = "Height should be greater than 60 cms";
+        } else if (parseInt(values.height) > 231) {
+            errors.height = "Height should be less than 230 cms";
+        }
+
+        if (!values.weight) {
+            errors.weight = 'Required';
+        } else if (values.weight.includes(".")) {
+            errors.weight = "Non decimal number is required";
+        } else if (!Number.isInteger(parseInt(values.weight))) {
+            errors.weight = "Enter a number";
+        } else if (parseInt(values.weight) < 39) {
+            errors.weight = "Weight should be greater than 40 kgs";
+        } else if (parseInt(values.weight) > 200) {
+            errors.weight = "Weight should be less than 200 kgs";
+        }
+
+        return errors;
+    }
 
     return (
         <div id="wrapper">
@@ -115,75 +190,9 @@ export default function saveUser() {
                                 <span>Share some personal information about you</span>
                             </header>
                             <Formik initialValues={getInitialValues()}
-                                validate={values => {
-                                    type ErrorT = {
-                                        fullname?: string;
-                                        email?: string;
-                                        mobile?: string;
-                                        dob?: string;
-                                        gender?: String;
-                                        weight?: String;
-                                        height?: string;
-                                        userId?: String;
-                                    }
-                                    const errors: ErrorT = {};
-                                    if (!values.email) {
-                                        errors.email = 'Required';
-                                    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-                                        errors.email = 'Invalid email address';
-                                    }
-                                    if (!values.fullname) {
-                                        errors.fullname = 'Required';
-                                    }
-                                    if (!values.mobile) {
-                                        errors.mobile = 'Required';
-                                    } else if (values.mobile.length != 10) {
-                                        errors.mobile = 'mobile number must be 10 digits';
-                                    }
-                                    if (!values.dob) {
-                                        errors.dob = 'Required';
-                                    } else if (getAge(values.dob) < 18) {
-                                        errors.dob = 'Date of birth should be greater than 18 years';
-                                    } else if (getAge(values.dob) > 110) {
-                                        errors.dob = 'Date of birth should be less than 110 years';
-                                    }
-                                    if (!values.height) {
-                                        errors.height = 'Required';
-                                    } else if (values.height.includes(".")) {
-                                        errors.height = "Non decimal number is required";
-                                    } else if (!Number.isInteger(parseInt(values.height))) {
-                                        errors.height = "Enter a number";
-                                    } else if (parseInt(values.height) < 59) {
-                                        errors.height = "Height should be greater than 60 cms";
-                                    } else if (parseInt(values.height) > 231) {
-                                        errors.height = "Height should be less than 230 cms";
-                                    }
-
-                                    if (!values.weight) {
-                                        errors.weight = 'Required';
-                                    } else if (values.weight.includes(".")) {
-                                        errors.weight = "Non decimal number is required";
-                                    } else if (!Number.isInteger(parseInt(values.weight))) {
-                                        errors.weight = "Enter a number";
-                                    } else if (parseInt(values.weight) < 39) {
-                                        errors.weight = "Weight should be greater than 40 kgs";
-                                    } else if (parseInt(values.weight) > 200) {
-                                        errors.weight = "Weight should be less than 200 kgs";
-                                    }
-
-                                    return errors;
-                                }}
+                                validate={values => validateForm(values)}
                                 onSubmit={async (values, { setSubmitting }) => {
-                                    //await new Promise((r) => setTimeout(r, 500));                                                        
-                                    //alert(JSON.stringify(values, null, 2));
-                                    values.userId = getloginUserDetails();
-                                    //console.log(JSON.stringify(values));
-                                    saveUserDetails(values).then((res) => {
-                                        res.json().then(data => console.log(data));
-                                        navigate('/binah');
-                                    }).catch(error => {
-                                        console.log("error =========> " + error.status);
-                                    })
+                                    onSubmitForm(values);
                                 }} >
                                 {({
                                     values,
@@ -223,13 +232,13 @@ export default function saveUser() {
                                             <div className="col-6 col-12-xsmall">
                                                 <Input
                                                     type="text"
-                                                    name="mobile"
+                                                    name="mobileNo"
                                                     onChange={handleChange}
                                                     onBlur={handleBlur}
-                                                    value={values.mobile}
+                                                    value={values.mobileNo}
                                                     placeholder='Enter Mobile No.'
                                                 />
-                                                {errors.mobile && touched.mobile && errors.mobile && <Tag style={tagStyle}>{errors.mobile}</Tag>}
+                                                {errors.mobileNo && touched.mobileNo && errors.mobileNo && <Tag style={tagStyle}>{errors.mobileNo}</Tag>}
                                             </div>
                                             <div className="col-6 col-12-xsmall">
                                                 <Input

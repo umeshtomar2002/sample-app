@@ -22,8 +22,6 @@ export default function currentReport() {
 
     let navigate = useNavigate();
     let location = useLocation()
-    console.log(JSON.stringify("location.state :::: "+location.state));
-    //console.log(location.state.heartRate.value);
    
     function binahPage() {
         navigate('/binah'); 
@@ -77,7 +75,7 @@ export default function currentReport() {
 
         if(location.state.page == 'binah'){
             const value:genericObj = {
-                familyId:"4",
+                familyId:location.state.familyId,
                 bloodPressure : location.state.data.bloodPressure != null && location.state.data.bloodPressure != undefined && location.state.data.bloodPressure.value !=null? location.state.data.bloodPressure.value : 'N/A',
                 breathingRate : location.state.data.breathingRate != null && location.state.data.breathingRate != undefined && location.state.data.breathingRate.value !=null? location.state.data.breathingRate.value : 'N/A',   
                 heartRate : location.state.data.heartRate != null && location.state.data.heartRate != undefined && location.state.data.heartRate.value !=null? location.state.data.heartRate.value : 'N/A',      
@@ -102,7 +100,6 @@ export default function currentReport() {
                 wellnessLevel: location.state.data.wellnessLevel != null && location.state.data.wellnessLevel != undefined && location.state.data.wellnessLevel.value !=null? location.state.data.wellnessLevel.value : 'N/A', 
             }
             healthList.push(value);
-            console.log(JSON.stringify(value));
             useEffect(() => {
                 saveHealthData(value)
                 .then(res =>{console.log("success=>"+JSON.stringify(res))}).catch(err=> {console.log("error => "+err)});
