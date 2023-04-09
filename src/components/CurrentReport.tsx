@@ -41,7 +41,7 @@ export default function currentReport() {
     const calcDate = (days:number) => {
         var date = new Date();
         date.setDate(date.getDate() - days);
-        return date.getFullYear() +'-'+(date.getMonth() +1)+'-'+date.getDate();
+        return date.getFullYear() +'-'+(date.getMonth() +1).toString().padStart(2, "0")+'-'+date.getDate().toString().padStart(2, "0");
     }    
 
     type genericObj = {
@@ -108,10 +108,12 @@ export default function currentReport() {
 
 
         if(location.state.page == 'viewReport'){
+            let fromDate = calcDate(location.state.data.report)
             const data ={
                 familyId:location.state.data.member,
-                fromDate:calcDate(location.state.data.report),
+                fromDate:fromDate,
                 toDate:calcDate(0),
+                currentDate:  fromDate == new Date().toISOString().substring(0, 10) ? true : false
             }
             useEffect(() => {
                 getHealthData(data).then(res=>{"succ=>"+res}).catch(err=>console.log("err=>"+err));
