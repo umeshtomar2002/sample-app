@@ -7,10 +7,10 @@ import { useCameras, useDisableZoom } from '../hooks';
 import UAParser from 'ua-parser-js';
 import Sidebar from './SidebarOld';
 import { Button } from 'antd';
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import SidebarNew from './SidebarNew';
 
-const Container = styled(Flex)<{ isSettingsOpen: boolean }>`
+const Container = styled(Flex) <{ isSettingsOpen: boolean }>`
   height: 100%;
   width: 100%;
   position: relative;
@@ -73,45 +73,49 @@ const BinahSdkImpl = () => {
     navigate(-1)
   }
 
-  return (    
+  return (
+    <div id="wrapper">
+      <div id="main">
         <div className="inner">
           <header id="header1">
-							<ul className="icons">
-								{/* <li><a href="#" className="icon"><i className="fa fa-language" aria-hidden="true"></i></a></li> */}                
-							</ul>
-						</header>
-            <section id="inside">
-									<div className="content">
-                      <header>
-                        <h2 className="align-center">Ready to measure your vital sign..</h2>
-                        <p className="align-center">Sit still, ensure your face is evenly illuminated and there is no light source in the background.</p>
-                      </header>
-                      <article className="align-center">
-                        <a href="#" className="image align-center"><img src="images/pic06.jpg"  alt=""/></a>
-                        {/* <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p> */}
-                      </article>								
-											
-										</div>
-							</section>            
-                <div className="content">
-                  <Container isSettingsOpen={isSettingsOpen}> 
-                    <BinahMonitor
-                      showMonitor={!(isMobile && isSettingsOpen)}
-                      cameraId={cameraId}
-                      onLicenseStatus={updateLicenseStatus}
-                      onSettingsClick={toggleSettingsClick}
-                      isSettingsOpen={isSettingsOpen}
-                    />
-                    <SettingsBars
-                      open={isSettingsOpen}
-                      onClose={handleCloseSettings}
-                      cameras={cameras}
-                      isLicenseValid={isLicenseValid}
-                    />
-                  </Container>
-                  </div> 
-                  <SidebarNew />                
-          </div>         
+            <ul className="icons">
+              {/* <li><a href="#" className="icon"><i className="fa fa-language" aria-hidden="true"></i></a></li> */}
+            </ul>
+          </header>
+          <section id="inside">
+            <div className="content">
+              <header>
+                <h2 className="align-center">Ready to measure your vital sign..</h2>
+                <p className="align-center">Sit still, ensure your face is evenly illuminated and there is no light source in the background.</p>
+              </header>
+              <article className="align-center">
+                <a href="#" className="image align-center"><img src="images/pic06.jpg" alt="" /></a>
+                {/* <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p> */}
+              </article>
+
+            </div>
+          </section>
+          <div className="content">
+            <Container isSettingsOpen={isSettingsOpen}>
+              <BinahMonitor
+                showMonitor={!(isMobile && isSettingsOpen)}
+                cameraId={cameraId}
+                onLicenseStatus={updateLicenseStatus}
+                onSettingsClick={toggleSettingsClick}
+                isSettingsOpen={isSettingsOpen}
+              />
+              <SettingsBars
+                open={isSettingsOpen}
+                onClose={handleCloseSettings}
+                cameras={cameras}
+                isLicenseValid={isLicenseValid}
+              />
+            </Container>
+          </div>
+        </div>
+      </div>
+      <SidebarNew />
+    </div>
   );
 };
 

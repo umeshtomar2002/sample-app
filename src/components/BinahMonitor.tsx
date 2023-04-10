@@ -270,7 +270,7 @@ const BinahMonitor = ({
             {isMeasuring() && <WarningAlert message={warningMessage} />}
             {isMeasuring() && <InfoAlert message={info.message} />}
             {sessionState === SessionState.STOPPING && isFinalResultsCaptured && console.log("Stop =====> " + JSON.stringify(vitalSigns) )}
-            {sessionState === SessionState.STOPPING && isFinalResultsCaptured && <Navigate to="/currentReport" state={{page:"binah",data:vitalSigns, familyId: location.state.familyId}} replace={true} />}            
+            {sessionState === SessionState.STOPPING && isFinalResultsCaptured && <Navigate to="/currentReport" state={{page:"binah",data:vitalSigns, familyId: location.state?.familyId}} replace={true} />}            
             {!isVideoReady() && licenseKey && <Loader />}
           </VideoAndStatsWrapper>
           <ButtomTimerWrapper>

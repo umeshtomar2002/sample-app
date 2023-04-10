@@ -56,7 +56,7 @@ export default function SidebarNew(){
                         </ul>
                     </nav>
 
-                    <div className="bottom_menu"><img src={MenuBack}/></div>
+                    {/* <div className="bottom_menu"><img src={MenuBack}/></div> */}
                 
             
             </div>
