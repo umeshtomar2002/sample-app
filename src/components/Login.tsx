@@ -42,7 +42,7 @@ export default function Login() {
                                     <span>Enter sign in details</span>
                                 </header>
                                 <Formik
-                                    initialValues={{ email: 'ri1o@gmail.com', password: 'qwerty' }}
+                                    initialValues={{ email: 'rio@gmail.com', password: 'qwerty' }}
                                     validate={values => {
                                         type ErrorT = {
                                             email?: string;
