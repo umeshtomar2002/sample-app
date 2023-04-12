@@ -20,6 +20,7 @@ function common() {
       https: true,
       host: '0.0.0.0',
       useLocalIp: true,
+      historyApiFallback: true,
       headers: {
         'Cross-Origin-Opener-Policy': 'same-origin',
         'Cross-Origin-Embedder-Policy': 'require-corp',
