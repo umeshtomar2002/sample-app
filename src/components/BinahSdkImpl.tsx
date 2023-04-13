@@ -112,6 +112,9 @@ const BinahSdkImpl = () => {
               />
             </Container>
           </div>
+          <div className="align-center" id="noteInfo">
+              <p><strong>Note : </strong> Please click on black button to start scan</p>
+          </div>
         </div>
       </div>
       <SidebarNew />

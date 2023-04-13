@@ -63,7 +63,7 @@ export default function AddUser() {
                                             {family.map((data,id)=>{
                                                 return <li><a href="#" key={data.familyId} className=" button large icon solid fa-user" onClick={()=>saveUserPage('update',data)}> {data.fullname}</a></li>
                                             })}
-                                            <li><a href="#" key="vhdjs" className="button primary large icon solid fa-plus" onClick={()=>saveUserPage('save',null)}> Friend & Family</a></li>
+                                            <li><a href="#" key="vhdjs" className="button primary large icon solid fa-plus" onClick={()=>saveUserPage('save',null)}> Add Members </a></li>
                                         </ul>
                                     </div>
                                 </section>
