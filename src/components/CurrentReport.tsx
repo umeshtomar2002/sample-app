@@ -22,6 +22,7 @@ export default function currentReport() {
 
     let navigate = useNavigate();
     let location = useLocation()
+    const[healthList, setHealthList] = useState([])
    
     function binahPage() {
         navigate('/binah'); 
@@ -71,8 +72,6 @@ export default function currentReport() {
         wellnessLevel?:string    
     };                           
     
-        const healthList = [];
-
         if(location.state.page == 'binah'){
             const value:genericObj = {
                 familyId:location.state.familyId,
@@ -99,13 +98,12 @@ export default function currentReport() {
                 wellnessIndex: location.state.data.wellnessIndex != null && location.state.data.wellnessIndex != undefined && location.state.data.wellnessIndex.value !=null? location.state.data.wellnessIndex.value : 'N/A',   
                 wellnessLevel: location.state.data.wellnessLevel != null && location.state.data.wellnessLevel != undefined && location.state.data.wellnessLevel.value !=null? location.state.data.wellnessLevel.value : 'N/A', 
             }
-            healthList.push(value);
             useEffect(() => {
+                setHealthList([value]);
                 saveHealthData(value)
                 .then(res =>{console.log("success=>"+JSON.stringify(res))}).catch(err=> {console.log("error => "+err)});
                }, [])
         }
-
 
         if(location.state.page == 'viewReport'){
             let fromDate = calcDate(location.state.data.report)
@@ -116,7 +114,11 @@ export default function currentReport() {
                 currentDate:  fromDate == new Date().toISOString().substring(0, 10) ? true : false
             }
             useEffect(() => {
-                getHealthData(data).then(res=>{"succ=>"+res}).catch(err=>console.log("err=>"+err));
+                getHealthData(data).then((res) =>
+                  res.json().then((response) => {
+                    setHealthList(response.data)
+                  })
+                );
             }, [])   
         }
 
