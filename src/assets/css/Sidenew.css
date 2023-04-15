@@ -126,3 +126,22 @@
     padding: 10px 20px;
   }
 }
+
+.small_logo{
+  left:0;
+}
+.headerOptions{
+  position: absolute;
+  top:0;
+  width: 20vw;
+  height: 20vh;
+  max-width: 50px;
+  max-height: 50px;
+  margin: 7%;
+
+}
+
+.header_menu{
+  right: 0;
+
+}

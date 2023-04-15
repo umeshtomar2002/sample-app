@@ -3345,11 +3345,6 @@ button:disabled,
   position: relative;
 }
 
-.small_logo{
-  position: absolute;
-  left:10px;
-  top:10px;
-}
 
 #header > * {
   -moz-flex: 1;
@@ -3364,12 +3359,6 @@ button:disabled,
   color: inherit;
   font-family: "Roboto Slab", serif;
   font-size: 1.125em;
-}
-.header_menu{
-  position: absolute;
-  right: 5px;
-  display: flex;
-  justify-content: flex-end;
 }
 
 #header .icons {

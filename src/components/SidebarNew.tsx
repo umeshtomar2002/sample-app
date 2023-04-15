@@ -22,7 +22,7 @@ export default function SidebarNew() {
     //     setOpen(false);
     // };
     const handleWindowResize = () => {
-        if(window.innerWidth > 900){
+        if(window.innerWidth > 1280){
             setShowMenu(false);
             setOpen(true)
         }else{
@@ -30,7 +30,6 @@ export default function SidebarNew() {
         }
         
     };
-    // handleWindowResize();
     useEffect(() => {
         window.addEventListener('resize', handleWindowResize);
         handleWindowResize();
@@ -61,8 +60,8 @@ export default function SidebarNew() {
 
     return (
         <>
-            <div className="small_logo">
-                    <img src={LogoImage} alt="Drivn Fintech" width="15%" />
+            <div className="small_logo headerOptions">
+                    <img src={LogoImage} alt="Drivn Fintech" width="100%" />
             </div>
             {open &&
                    <div id="sidebar">
@@ -84,8 +83,8 @@ export default function SidebarNew() {
             }
      
             { showMenu &&
-                <div className="header_menu">
-                    <img src={Menu} alt="Drivn Fintech" width="50%" onClick={() => setOpen(!open)}/>
+                <div className="header_menu headerOptions">
+                    <img src={Menu} alt="Drivn Fintech" width="100%" onClick={() => setOpen(!open)}/>
                 </div>
             }
 
