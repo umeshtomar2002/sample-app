@@ -3,8 +3,9 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import "../assets/css/main.css";
 import { Field, Formik } from "formik";
 import { Button, Input, Switch, Tag } from "antd";
-import { getloginUserDetails, saveUserDetails, updateUserDetails } from "./Client";
+import { getloginUserDetails, saveUserDetails } from "./Client";
 import SidebarNew from "./SidebarNew";
+import { CalendarOutlined } from "@ant-design/icons";
 
 const tagStyle = { backgroundColor: '#f50' };
 
@@ -103,7 +104,8 @@ export default function saveUser() {
         //await new Promise((r) => setTimeout(r, 500));                                                        
         //alert(JSON.stringify(values, null, 2));
         values.userId = getloginUserDetails();
-        let response = currentDetails ? updateUserDetails(values) : saveUserDetails(values)
+        values.familyId = currentDetails ? currentDetails.familyId : null
+        let response = saveUserDetails(values)
         response.then((res) => {
             res.json().then(respData => {
                 navigate('/binah',{state:{familyId: currentDetails ? values.familyId : respData.data.familyId}});
@@ -125,27 +127,27 @@ export default function saveUser() {
         }
         const errors: ErrorT = {};
         if (!values.email) {
-            errors.email = 'Required';
+            errors.email = 'Please enter your email address.';
         } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
             errors.email = 'Invalid email address';
         }
         if (!values.fullname) {
-            errors.fullname = 'Required';
+            errors.fullname = 'Please enter your full name.';
         }
         if (!values.mobileNo) {
-            errors.mobileNo = 'Required';
+            errors.mobileNo = 'Please enter your contact number.';
         } else if (values.mobileNo.length != 10) {
             errors.mobileNo = 'mobile number must be 10 digits';
         }
         if (!values.dob) {
-            errors.dob = 'Required';
+            errors.dob = 'Please enter your date of birth.';
         } else if (getAge(values.dob) < 18) {
             errors.dob = 'Date of birth should be greater than 18 years';
         } else if (getAge(values.dob) > 110) {
             errors.dob = 'Date of birth should be less than 110 years';
         }
         if (!values.height) {
-            errors.height = 'Required';
+            errors.height = 'Please enter your height.';
         } else if (values.height.includes(".")) {
             errors.height = "Non decimal number is required";
         } else if (!Number.isInteger(parseInt(values.height))) {
@@ -157,7 +159,7 @@ export default function saveUser() {
         }
 
         if (!values.weight) {
-            errors.weight = 'Required';
+            errors.weight = 'Please enter your weight.';
         } else if (values.weight.includes(".")) {
             errors.weight = "Non decimal number is required";
         } else if (!Number.isInteger(parseInt(values.weight))) {
@@ -176,9 +178,9 @@ export default function saveUser() {
             <div id="main">
                 <section className="inner">
                     <header id="header">
-                        <ul className="icons">
+                        {/* <ul className="icons">
                             <li><a href="#" className="icon"><i className="fa fa-language" aria-hidden="true"></i></a></li>
-                        </ul>
+                        </ul> */}
                     </header>
 
 
@@ -239,11 +241,13 @@ export default function saveUser() {
                                                 />
                                                 {errors.mobileNo && touched.mobileNo && errors.mobileNo && <Tag style={tagStyle}>{errors.mobileNo}</Tag>}
                                             </div>
-                                            <div className="col-6 col-12-xsmall">
+                                            <div id="my-radio-group" className="col-2 col-12-small">Date of birth</div>
+                                            <div className="col-4 col-12-xsmall">
+
                                                 <Input
                                                     type="date"
                                                     name="dob"
-                                                    placeholder="Date of birth"
+                                                    // addonBefore="Date of birth"
                                                     onChange={handleChange}
                                                     onBlur={handleBlur}
                                                     value={values.dob}
@@ -278,6 +282,7 @@ export default function saveUser() {
                                                     onBlur={handleBlur}
                                                     value={values.weight}
                                                     placeholder='Enter weight in KGs.'
+                                                    suffix="KG"
                                                 />
                                                 {errors.weight && touched.weight && errors.weight && <Tag style={tagStyle}>{errors.weight}</Tag>}
 
@@ -312,6 +317,7 @@ export default function saveUser() {
                                                     onBlur={handleBlur}
                                                     value={values.height}
                                                     placeholder='Enter height in CMs.'
+                                                    suffix="CM"
                                                 />
                                                 {errors.height && touched.height && errors.height && <Tag style={tagStyle}>{errors.height}</Tag>}
 

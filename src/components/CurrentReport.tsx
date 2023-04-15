@@ -12,6 +12,7 @@ import Hemoglobin from "../assets/images/Hemoglobin.svg";
 import HemoglobinA1c  from "../assets/images/Hemoglobin-A1c.svg";
 import StressLevel  from "../assets/images/Stress-Level.svg";
 import RecoveryAblity  from "../assets/images/Recovery-Ability.svg";
+// import BloodPressure  from "../assets/images/BloodPressure.svg";
 import StressResponse  from "../assets/images/Stress-Response.svg";
 import HRVSDNN  from "../assets/images/HRV-SDNN.svg";
 import SidebarNew from "./SidebarNew";
@@ -172,8 +173,8 @@ export default function currentReport() {
                                                 <li><p className="r-icon"><img src={Heartrate}/> Heart Rate</p><p><strong>{d.heartRate}</strong></p></li>
                                                 <li><p className="r-icon"><img src={Breathrate}/> Breathing Rate</p><p><strong>{d.breathingRate}</strong></p></li>
                                                 <li><p className="r-icon"><img src={PQR}/> PRQ</p><p><strong>{d.prq}</strong></p></li>
-                                                <li><p className="r-icon"><img src={SpO2}/> Oxygen Saturation</p><p><strong>{d.spo2}</strong></p></li>
-                                                <li><p className="r-icon"> Blood Pressure</p><p><strong>{d.bloodPressure}</strong></p></li>
+                                                <li><p className="r-icon"><img src={SpO2}/> Oxygen Saturation</p><p><strong>{d.oxygenSaturation }</strong></p></li>
+                                                <li><p className="r-icon"><img src={StressResponse}/> Blood Pressure</p><p><strong>{d.bloodPressure}</strong></p></li>
                                                 <li><p className="r-icon"><img src={Hemoglobin}/> Hemoglobin</p><p><strong>{d.hemoglobinSign}</strong></p></li>
                                                 <li><p className="r-icon"><img src={HemoglobinA1c}/> Hemoglobin A1c</p><p><strong>{d.hemoglobinSign}</strong></p></li>
                                                 <li><p className="r-icon"><img src={StressLevel}/> Stress Level</p><p><strong>{d.stressLevel}</strong></p></li>
@@ -186,7 +187,10 @@ export default function currentReport() {
 
                                 											
 							</ul>
-                            <p className="clear text-center"><a href="#" className="button   icon solid fa-share"> Share</a> &nbsp; <a href="#" className="button primary" onClick={()=>binahPage()}> Test Again</a></p>
+                            <p id="reportButtons" className="clear text-center">
+                                <a href="#" className="button icon solid fa-share"> Share</a> &nbsp; 
+                                <a href="#" className="button primary" onClick={()=>binahPage()}> Test Again</a>
+                            </p>
                            </div>
                         </section>        
                     </div></div> 

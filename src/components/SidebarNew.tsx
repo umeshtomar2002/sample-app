@@ -6,7 +6,7 @@ import Myprofile from '../assets/images/my_profile.svg';
 import ScanSvg from '../assets/images/scan.svg';
 import ReportSvg from '../assets/images/report.svg';
 import LogoutSvg from '../assets/images/logout.svg';
-import Menu from '../assets/images/menu.svg';
+import Menu from '../assets/images/menu1.svg';
 import { useNavigate } from "react-router-dom";
 
 export default function SidebarNew() {

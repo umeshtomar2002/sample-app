@@ -7,7 +7,7 @@ import LoginSvg from '../assets/images/Logo.svg';
 
 
 const inputBottomMargin = { marginBottom: '5px' };
-const tagStyle = { backgroundColor: '#f50' };
+const tagStyle = { color : "red" };
 const usrAgfosize = { fontSize: "10px" };
 const usrAgfosizeColor = { color: "#ee7a22" };
 const errorMessageStyle = { color: "red", minHeight: "25px", fontWeight: "500", margin: "2px" };
@@ -21,8 +21,8 @@ export default function Login() {
         maxWidth: '200px',
         maxHeight: '200px',
         overflow: 'hidden',
-        height: 'calc(0.38461 * 100vw - 184px)',
-        width: 'calc(0.38461 * 100vw - 184px)',
+        // height: 'calc(0.38461 * 100vw - 184px)',
+        // width: 'calc(0.38461 * 100vw - 184px)',
     };
 
     return (
@@ -50,14 +50,14 @@ export default function Login() {
                                         }
                                         const errors: ErrorT = {};
                                         if (!values.email) {
-                                            errors.email = 'Required';
+                                            errors.email = 'Please enter your email address.';
                                         } else if (
                                             !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
                                         ) {
                                             errors.email = 'Invalid email address';
                                         }
                                         if (!values.password) {
-                                            errors.password = 'Required';
+                                            errors.password = 'Please enter your password';
                                         }
                                         return errors;
                                     }}
@@ -130,7 +130,7 @@ export default function Login() {
                                                     </div>
                                                     <div style={errorMessageStyle}>{errorMessage && <div> {errorMessage} </div>}</div>
                                                     <div className="col-12 mt-13">
-                                                        <Button className="primary" onClick={() => submitForm()}>
+                                                        <Button className="primary loginButton" onClick={() => submitForm()}>
                                                             Login
                                                         </Button>
                                                     </div>

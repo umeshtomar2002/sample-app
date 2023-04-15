@@ -38,9 +38,9 @@ export default function viewReport() {
                 <SidebarNew /> 
                     <div className="inner">
                         <header id="header">
-							<ul className="icons">
+							{/* <ul className="icons">
 								<li><a href="#" className="icon"><i className="fa fa-language" aria-hidden="true"></i></a></li>
-							</ul>
+							</ul> */}
 						</header>
                         <section id="inside">                            
 							<div className="content">
