@@ -128,15 +128,19 @@
 }
 
 .small_logo{
+  width: 60px;
   left:0;
 }
+
 .headerOptions{
+  display: flex;
+  justify-content: center;
   position: absolute;
   top:0;
   width: 20vw;
   height: 20vh;
-  max-width: 50px;
-  max-height: 50px;
+  max-width: 60px;
+  max-height: 60px;
   margin: 7%;
 
 }

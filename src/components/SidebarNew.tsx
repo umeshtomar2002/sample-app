@@ -67,7 +67,7 @@ export default function SidebarNew() {
                    <div id="sidebar">
                    <div className="inner">
                        <section id="logo" className="alt align-center">
-                           <img src={LogoImage} alt="Drivn Fintech" width="40%" />
+                           <img src={LogoImage} alt="Drivn Fintech" width="60px" />
                        </section>
                        <nav id="menu">
                            <ul>
@@ -84,7 +84,7 @@ export default function SidebarNew() {
      
             { showMenu &&
                 <div className="header_menu headerOptions">
-                    <img src={Menu} alt="Drivn Fintech" width="100%" onClick={() => setOpen(!open)}/>
+                    <img src={Menu} alt="Drivn Fintech" width="50px" onClick={() => setOpen(!open)}/>
                 </div>
             }
 
