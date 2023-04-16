@@ -71,8 +71,8 @@ export default function SidebarNew() {
                        </section>
                        <nav id="menu">
                            <ul>
-                               <li><a href="#" onClick={() => addUserPage()}><img src={Myprofile} alt="" /> My Profile</a></li>
-                               <li><a href="#" onClick={() => binahPage()}><img src={ScanSvg} alt="" />Measure Now</a></li>
+                               {/* <li><a href="#" onClick={() => addUserPage()}><img src={Myprofile} alt="" /> My Profile</a></li> */}
+                               <li><a href="#" onClick={() => addUserPage()}><img src={ScanSvg} alt="" />Measure Now</a></li>
                                <li><a href="#" onClick={() => viewReportPage()}><img src={ReportSvg} alt="" /> View Reports</a></li>
                                <li><a href="#"><img src={LogoutSvg} onClick={() => loginPage()} alt="" /> Logout</a></li>
                            </ul>
