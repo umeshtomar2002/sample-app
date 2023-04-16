@@ -52,3 +52,10 @@ svg {
 			.result li p.r-icon {font-size:12px}
 			.result li p.r-icon img{width:35px; height: 35px; display: block;}
 			@media only screen and (max-width: 600px) {.result li{width:44%} .meter{width:100%}}
+
+.spinner {
+    height: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}

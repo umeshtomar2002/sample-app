@@ -17,6 +17,7 @@ import StressResponse  from "../assets/images/Stress-Response.svg";
 import HRVSDNN  from "../assets/images/HRV-SDNN.svg";
 import SidebarNew from "./SidebarNew";
 import { getHealthData, saveHealthData } from "./Client";
+import Spinner from "./shared/Spinner";
 
 
 export default function currentReport() {
@@ -24,6 +25,7 @@ export default function currentReport() {
     let navigate = useNavigate();
     let location = useLocation()
     const[healthList, setHealthList] = useState([])
+    const[spinner, setSpinner] = useState(false)
    
     function binahPage() {
         navigate('/binah'); 
@@ -100,10 +102,18 @@ export default function currentReport() {
                 wellnessLevel: location.state.data.wellnessLevel != null && location.state.data.wellnessLevel != undefined && location.state.data.wellnessLevel.value !=null? location.state.data.wellnessLevel.value : 'N/A', 
             }
             useEffect(() => {
-                setHealthList([value]);
-                saveHealthData(value)
-                .then(res =>{console.log("success=>"+JSON.stringify(res))}).catch(err=> {console.log("error => "+err)});
-               }, [])
+              setSpinner(true);
+              setHealthList([value]);
+              saveHealthData(value)
+                .then((res) => {
+                  console.log("success=>" + JSON.stringify(res));
+                  setSpinner(false);
+                })
+                .catch((err) => {
+                    setSpinner(false);
+                    console.log("error => " + err);
+                });
+            }, []);
         }
 
         if(location.state.page == 'viewReport'){
@@ -115,12 +125,18 @@ export default function currentReport() {
                 currentDate:  fromDate == new Date().toISOString().substring(0, 10) ? true : false
             }
             useEffect(() => {
-                getHealthData(data).then((res) =>
-                  res.json().then((response) => {
-                    setHealthList(response.data)
-                  })
-                );
-            }, [])   
+              setSpinner(true);
+              getHealthData(data).then((res) =>
+                res.json().then((response) => {
+                  setHealthList(response.data);
+                  setSpinner(false);
+                })
+                .catch((err) => {
+                    setSpinner(false);
+                    console.log("error => " + err);
+                })
+              );
+            }, []);   
         }
 
 
@@ -165,6 +181,8 @@ export default function currentReport() {
 	                            <p><i>*The measured indicators are not intended for medical use</i></p></div>
                             </div>
                             
+                            {spinner && <Spinner />}
+
                             <ul className="result">
 
                             {healthList.map((d:genericObj,id:any)=>{
