@@ -1,6 +1,6 @@
 import { Input, Button, Tag, Col, Row } from "antd";
 import { Formik } from "formik";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { checkLogin } from "./Client";
 import { useNavigate } from "react-router-dom";
 import LoginSvg from '../assets/images/Logo.svg';
@@ -21,6 +21,8 @@ export default function Login() {
     const navigate = useNavigate();
     const [clearError, setClearError] = useState({ state: false, msg: "" });
     const [errorMessage, setErrorMessage] = useState("");
+    const [loginMobileSvg, setLoginMobileSvg] = useState(false)
+
     const mystyle = {
         // maxWidth: '200px',
         // maxHeight: 'calc(100%-20px)',
@@ -29,6 +31,38 @@ export default function Login() {
         // width: 'calc(0.38461 * 100vw - 184px)',
     };
 
+    const handleWindowResize = () => {
+        if(window.innerWidth > 768){
+            setLoginMobileSvg(false)
+        }else{
+            setLoginMobileSvg(true);
+        }
+        
+    };
+
+    useEffect(() => {
+        window.addEventListener('resize', handleWindowResize);
+        handleWindowResize();
+        return () => {
+          window.removeEventListener('resize', handleWindowResize);
+        };
+    });
+
+    const getLoginSVG = () => {
+        if(loginMobileSvg){
+            return (
+                <Col xs={24} sm={24} id="loginBanner" className="loginBanner">
+                    <img src={LoginSvg} style={mystyle} width="40%"/>
+                </Col>
+            )
+        }else{
+            return (
+                <Col md={12} lg={12} xl={12} className="loginBanner">
+                    <img src={LoginBanner} style={mystyle}/>
+                </Col>
+            )
+        }
+    }
     return (
         <>
             <div id="wrapper">
@@ -36,12 +70,8 @@ export default function Login() {
                     <section className="inner">
 
                         <Row className="loginContainer">
-                            <Col md={12} lg={12} xl={12} className="loginBanner">
-                                <img src={LoginBanner} style={mystyle}/>
-                            </Col>
-                            <Col xs={24} sm={24} id="loginBanner" className="loginBanner">
-                                <img src={LoginSvg} style={mystyle}/>
-                            </Col>
+                            
+                            { getLoginSVG() }
                             <Col xs={24} sm={24} md={12} lg={12} xl={12} className="loginPage">
 
                                 <div id="inside">

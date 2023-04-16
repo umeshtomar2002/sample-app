@@ -3641,13 +3641,11 @@ button:disabled,
   max-height: 100%;
 }
 
-.loginPage{
-  padding:10%
+#loginBanner{
 
 }
 
-@media only screen and (min-width: 768px) {
-  #loginBanner {
-    display: none;
-  }
+.loginPage{
+  padding:10%
+
 }

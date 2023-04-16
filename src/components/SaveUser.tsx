@@ -7,7 +7,7 @@ import { getloginUserDetails, saveUserDetails } from "./Client";
 import SidebarNew from "./SidebarNew";
 import { CalendarOutlined } from "@ant-design/icons";
 
-const tagStyle = { backgroundColor: '#f50' };
+const tagStyle = { color: 'red' };
 
 export default function saveUser() {
 
