@@ -73,7 +73,7 @@ export default function saveUser() {
     }
 
     const getAge = (dateString: string) => {
-        var reFormat = dateString.split('-')[2] + "/" + dateString.split('-')[1] + "/" + dateString.split('-')[0];
+        var reFormat = dateString.split('-')[1] + "/" + dateString.split('-')[2] + "/" + dateString.split('-')[0];
         var today = new Date();
         var birthDate = new Date(reFormat);
         var age = today.getFullYear() - birthDate.getFullYear();
@@ -243,7 +243,6 @@ export default function saveUser() {
                                             </div>
                                             <div id="my-radio-group" className="col-2 col-12-small">Date of birth</div>
                                             <div className="col-4 col-12-xsmall">
-
                                                 <Input
                                                     type="date"
                                                     name="dob"
