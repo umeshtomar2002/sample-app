@@ -162,7 +162,7 @@ export default function Login() {
                                                                     {errors.password && touched.password && errors.password && <Tag style={tagStyle}>{errors.password}</Tag>}
                                                                 </div>
                                                             </div>
-                                                            <div className="mbLoginFields">
+                                                            <div className="">
                                                                 <div className="col-3 col-12-xsmall">
                                                                     <span style={usrAgfosize}> By pressing "Login" you will accept Drivn Fintech's <span style={usrAgfosizeColor}> User Agreement</span> Conditions.</span>
                                                                 </div>

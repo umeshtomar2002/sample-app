@@ -84,7 +84,7 @@ export default function SidebarNew() {
      
             { showMenu &&
                 <div className="header_menu headerOptions">
-                    <img src={Menu} alt="Drivn Fintech" width="50px" onClick={() => setOpen(!open)}/>
+                    <img src={Menu} alt="Drivn Fintech" width="35px" onClick={() => setOpen(!open)}/>
                 </div>
             }
 
