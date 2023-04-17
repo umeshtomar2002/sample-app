@@ -11,7 +11,6 @@ export default function viewReport() {
 
     let navigate = useNavigate();
     let location = useLocation()
-    console.log(JSON.stringify(location.state));
     
     const tagStyle = {backgroundColor:'#f50'};
 

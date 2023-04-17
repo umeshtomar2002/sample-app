@@ -104,11 +104,11 @@ export default function saveUser() {
         //await new Promise((r) => setTimeout(r, 500));                                                        
         //alert(JSON.stringify(values, null, 2));
         values.userId = getloginUserDetails();
-        values.familyId = currentDetails ? currentDetails.familyId : null
+        values.familyId = currentDetails ? currentDetails.familyId : ""
         let response = saveUserDetails(values)
         response.then((res) => {
             res.json().then(respData => {
-                navigate('/binah',{state:{familyId: currentDetails ? values.familyId : respData.data.familyId}});
+                navigate('/binah',{state:{familyId: respData.data[0].familyId}});
             });
         }).catch(error => {
             console.log("error =========> " + error.status);

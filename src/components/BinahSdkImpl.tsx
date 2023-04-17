@@ -89,7 +89,7 @@ const BinahSdkImpl = () => {
                 <p className="align-center">Sit still, ensure your face is evenly illuminated and there is no light source in the background.</p>
               </header>
               <article className="align-center">
-                <a href="#" className="image align-center"><img src="images/pic06.jpg" alt="" /></a>
+                <a href="#" className="image align-center"></a>
                 {/* <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p> */}
               </article>
 
