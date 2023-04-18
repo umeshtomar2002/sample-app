@@ -11,15 +11,13 @@ p{margin-left: 0px; margin-bottom: 15px}
   width: 30%;
   margin:0px 20px 0px 0px; float: left;
 }
-#meter {
-}
+
 #needle {
   position: absolute;
   left: 40%;
   top: 0%;
   transform-origin: 50% calc(100% - 25px);
-  transform: rotate(-110deg);
-
+  /* transform: rotate(-110deg); */
   animation: rotate 5s ease-in-out alternate infinite;
 }
 
@@ -58,4 +56,13 @@ svg {
     width: 100%;
     display: flex;
     justify-content: center;
+}
+
+.reportBreak{
+  display: flex;
+  width: 100%;
+  /* border-bottom: 1px solid lightgrey; */
+  justify-content: center;
+  margin: 4px 0;
+
 }

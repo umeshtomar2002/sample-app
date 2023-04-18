@@ -19,14 +19,14 @@ import SidebarNew from "./SidebarNew";
 import { getHealthData, saveHealthData } from "./Client";
 import Spinner from "./shared/Spinner";
 
-
 export default function currentReport() {
 
     let navigate = useNavigate();
     let location = useLocation()
     const[healthList, setHealthList] = useState([])
     const[spinner, setSpinner] = useState(false)
-   
+    let meterTransformStyle = {  transform: "rotate(-110deg)" };
+
     function binahPage() {
         navigate('/binah'); 
     }
@@ -49,11 +49,14 @@ export default function currentReport() {
     }    
 
     type genericObj = {
-        familyId?:string,							
-        bloodPressure?:string,   
+        familyId?:string,		
+        // bloodPressure?:string,   					
+        systolicBp?:string,   
+        diastolicBp?:string,   
         breathingRate?:string,   
         heartRate?: string,      
-        hemoglobinSign?:string,  
+        hemoglobinSign?:string, 
+        hemoglobinA1c:string
         hrvSdnn?:string,         
         lfhf?:string,            
         meanRri?:string,         
@@ -78,10 +81,12 @@ export default function currentReport() {
         if(location.state.page == 'binah'){
             const value:genericObj = {
                 familyId:location.state.familyId,
-                bloodPressure : location.state.data.bloodPressure?.value?.systolic != null && location.state.data.bloodPressure?.value?.systolic != undefined && location.state.data.bloodPressure?.value?.systolic !=null? location.state.data.bloodPressure?.value?.systolic : 'N/A',
+                systolicBp : location.state.data.bloodPressure?.value?.systolic != null && location.state.data.bloodPressure?.value?.systolic != undefined && location.state.data.bloodPressure?.value?.systolic !=null? location.state.data.bloodPressure?.value?.systolic : 'N/A',
+                diastolicBp : location.state.data.bloodPressure?.value?.diastolic != null && location.state.data.bloodPressure?.value?.diastolic != undefined && location.state.data.bloodPressure?.value?.diastolic !=null? location.state.data.bloodPressure?.value?.diastolic : 'N/A',
                 breathingRate : location.state.data.breathingRate != null && location.state.data.breathingRate != undefined && location.state.data.breathingRate.value !=null? location.state.data.breathingRate.value : 'N/A',   
                 heartRate : location.state.data.heartRate != null && location.state.data.heartRate != undefined && location.state.data.heartRate.value !=null? location.state.data.heartRate.value : 'N/A',      
                 hemoglobinSign : location.state.data.hemoglobinSign != null && location.state.data.hemoglobinSign != undefined && location.state.data.hemoglobinSign.value !=null? location.state.data.hemoglobinSign.value : 'N/A',  
+                hemoglobinA1c : location.state.data.hemoglobinA1c != null && location.state.data.hemoglobinA1c != undefined && location.state.data.hemoglobinA1c.value !=null? location.state.data.hemoglobinA1c.value : 'N/A',  
                 hrvSdnn : location.state.data.hrvSdnn != null && location.state.data.hrvSdnn != undefined && location.state.data.hrvSdnn.value !=null? location.state.data.hrvSdnn.value : 'N/A',         
                 lfhf : location.state.data.lfhf != null && location.state.data.lfhf != undefined && location.state.data.lfhf.value !=null? location.state.data.lfhf.value : 'N/A',            
                 meanRri : location.state.data.meanRri != null && location.state.data.meanRri != undefined && location.state.data.meanRri.value !=null? location.state.data.meanRri.value : 'N/A',         
@@ -130,6 +135,7 @@ export default function currentReport() {
                 res.json().then((response) => {
                   setHealthList(response.data);
                   setSpinner(false);
+
                 })
                 .catch((err) => {
                     setSpinner(false);
@@ -138,7 +144,16 @@ export default function currentReport() {
               );
             }, []);   
         }
+        let meterResult = "N/A"
+        if(healthList.length>0 && healthList[0].wellnessLevel && healthList[0].wellnessLevel!="N/A"){
+            meterResult = healthList[0]?.wellnessLevel + "/10"
+        }
 
+        // if(healthList.length>0 && healthList[0].wellnessIndex && healthList[0].wellnessIndex!="N/A"){
+        //     let degree = -110+11*1+110;
+        //     meterTransformStyle = {  transform: `rotate(${degree}deg)` };
+        // }
+        // console.log("meterTransformStyle:::",meterTransformStyle)
 
     return(
         <>
@@ -163,7 +178,7 @@ export default function currentReport() {
                                                 <stop offset="0.786458" stopColor="#01C738" />
                                                 </linearGradient>
                                             </defs>
-                                            </svg><svg width="30" height="144" id="needle" viewBox="0 0 30 144" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            </svg><svg width="30" height="144" id="needle" style={meterTransformStyle} viewBox="0 0 30 144" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <circle cx="15.2089" cy="128.608" r="10.9086" fill="white" stroke="#01C738" strokeWidth="7" />
                                             <path fillRule="evenodd" clipRule="evenodd" d="M17.3486 0.920656L25.3277 127.679L25.3166 127.679C25.322 127.833 25.3239 127.988 25.322 128.144C25.2587 133.535 20.8377 137.853 15.4474 137.79C10.0571 137.726 5.73875 133.305 5.80203 127.915C5.80386 127.759 5.80934 127.604 5.81838 127.45L5.80766 127.45L17.3486 0.920656ZM19.2238 134.487C22.4036 132.316 23.2212 127.978 21.0498 124.798C18.8784 121.618 14.5404 120.801 11.3606 122.972C8.18076 125.144 7.36323 129.482 9.53459 132.661C11.706 135.841 16.044 136.659 19.2238 134.487Z" fill="url(#paint0_linear_498_1180)" />
                                             <defs>
@@ -173,7 +188,7 @@ export default function currentReport() {
                                                 </linearGradient>
                                             </defs>
                                         </svg>
-                                    <h3>N/A</h3>
+                                        <h3>{meterResult}</h3>
                                 </div>
                             
                             <div className="result-score-text"><h3>Your Welness Score is low.</h3>
@@ -186,22 +201,27 @@ export default function currentReport() {
                             <ul className="result">
 
 
-                            {healthList.map((d:genericObj,id)=>{
+                            {healthList.map((d,id)=>{
                                     return(
+                                        <>
+                                        <span className="reportBreak">{new Date(d.updatedAt).toLocaleString()}</span>
                                             <span key={id}> 
                                                 <li key={id+d.familyId+"hr"} ><p className="r-icon"><img src={Heartrate}/> Heart Rate</p><p><strong>{d.heartRate}</strong></p></li>
                                                 <li key={id+d.familyId+"br"} ><p className="r-icon"><img src={Breathrate}/> Breathing Rate</p><p><strong>{d.breathingRate}</strong></p></li>
                                                 <li key={id+d.familyId+"prq"} ><p className="r-icon"><img src={PQR}/> PRQ</p><p><strong>{d.prq}</strong></p></li>
-                                                <li key={id+d.familyId+"os"} ><p className="r-icon"><img src={SpO2}/> Oxygen Saturation</p><p><strong>{d.oxygenSaturation }</strong></p></li>
-                                                <li key={id+d.familyId+"bp"} ><p className="r-icon"><img src={StressResponse}/> Blood Pressure</p><p><strong>{d.bloodPressure}</strong></p></li>
+                                                <li key={id+d.familyId+"bp-d"} ><p className="r-icon"><img src={SpO2}/> Blood Pressure(D)</p><p><strong>{d.diastolicBp}</strong></p></li>
+                                                <li key={id+d.familyId+"bp-s"} ><p className="r-icon"><img src={StressResponse}/> Blood Pressure(S)</p><p><strong>{d.systolicBp}</strong></p></li>
                                                 <li key={id+d.familyId+"hg"} ><p className="r-icon"><img src={Hemoglobin}/> Hemoglobin</p><p><strong>{d.hemoglobinSign}</strong></p></li>
-                                                <li key={id+d.familyId+"hga1"} ><p className="r-icon"><img src={HemoglobinA1c}/> Hemoglobin A1c</p><p><strong>{d.hemoglobinSign}</strong></p></li>
+                                                <li key={id+d.familyId+"hga1"} ><p className="r-icon"><img src={HemoglobinA1c}/> Hemoglobin A1c</p><p><strong>{d.hemoglobinA1c}</strong></p></li>
                                                 <li key={id+d.familyId+"sl"} ><p className="r-icon"><img src={StressLevel}/> Stress Level</p><p><strong>{d.stressLevel}</strong></p></li>
                                                 <li key={id+d.familyId+"wi"} ><p className="r-icon"><img src={RecoveryAblity}/> Wellness Index</p><p><strong>{d.wellnessIndex}</strong></p></li>
                                                 <li key={id+d.familyId+"el"} ><p className="r-icon"><img src={HRVSDNN}/> Wellness Level</p><p><strong>{d.wellnessLevel}</strong></p></li>
                                                 {/* <li><p className="r-icon"><img src={RecoveryAblity}/> Recovery Ability</p><p><strong>N/A</strong></p></li> */}
                                                 {/* <li><p className="r-icon"><img src={HRVSDNN}/> HRV-SDNN</p><p><strong>{d.hrvSdnn}</strong></p></li> */}
                                             </span>
+                                        
+                                        </>
+                                        
                                 )})}
 
                                 											
