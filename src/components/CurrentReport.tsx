@@ -77,12 +77,12 @@ export default function currentReport() {
         wellnessIndex?:string,   
         wellnessLevel?:string    
     };                           
-    // console.log("location.state:::::",JSON.stringify(location.state));
+    console.log("location.state:::::",JSON.stringify(location.state));
         if(location.state.page == 'binah'){
             const value:genericObj = {
                 familyId:location.state.familyId,
-                systolicBp : location.state.data.bloodPressure?.value?.systolic != null && location.state.data.bloodPressure?.value?.systolic != undefined && location.state.data.bloodPressure?.value?.systolic !=null? location.state.data.bloodPressure?.value?.systolic : 'N/A',
-                diastolicBp : location.state.data.bloodPressure?.value?.diastolic != null && location.state.data.bloodPressure?.value?.diastolic != undefined && location.state.data.bloodPressure?.value?.diastolic !=null? location.state.data.bloodPressure?.value?.diastolic : 'N/A',
+                systolicBp : location.state.data.bloodPressure.value?.systolic != null && location.state.data.bloodPressure.value?.systolic != undefined && location.state.data.bloodPressure.value?.systolic !=null? location.state.data.bloodPressure.value?.systolic : 'N/A',
+                diastolicBp : location.state.data.bloodPressure.value?.diastolic != null && location.state.data.bloodPressure.value?.diastolic != undefined && location.state.data.bloodPressure.value?.diastolic !=null? location.state.data.bloodPressure.value?.diastolic : 'N/A',
                 breathingRate : location.state.data.breathingRate != null && location.state.data.breathingRate != undefined && location.state.data.breathingRate.value !=null? location.state.data.breathingRate.value : 'N/A',   
                 heartRate : location.state.data.heartRate != null && location.state.data.heartRate != undefined && location.state.data.heartRate.value !=null? location.state.data.heartRate.value : 'N/A',      
                 hemoglobinSign : location.state.data.hemoglobinSign != null && location.state.data.hemoglobinSign != undefined && location.state.data.hemoglobinSign.value !=null? location.state.data.hemoglobinSign.value : 'N/A',  
@@ -203,7 +203,7 @@ export default function currentReport() {
                             {healthList.map((d,id)=>{
                                     return(
                                         <>
-                                        <span className="reportBreak">{new Date(d.updatedAt).toLocaleString()}</span>
+                                        <span className="reportBreak" key={id+"time"}>{((d && d.updateAt) ? (new Date(d.updateAt)) : (new Date())).toLocaleString()}</span>
                                             <span key={id}> 
                                                 <li key={id+d.familyId+"hr"} ><p className="r-icon"><img src={Heartrate}/> Heart Rate</p><p><strong>{d.heartRate}</strong></p></li>
                                                 <li key={id+d.familyId+"br"} ><p className="r-icon"><img src={Breathrate}/> Breathing Rate</p><p><strong>{d.breathingRate}</strong></p></li>
