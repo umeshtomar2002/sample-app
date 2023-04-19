@@ -108,7 +108,7 @@ export default function saveUser() {
         let response = saveUserDetails(values)
         response.then((res) => {
             res.json().then(respData => {
-                navigate('/binah',{state:{familyId: respData.data[0].familyId}});
+                navigate('/binah',{state:{familyId: respData.data.familyId}});
             });
         }).catch(error => {
             console.log("error =========> " + error.status);

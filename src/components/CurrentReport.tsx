@@ -149,11 +149,10 @@ export default function currentReport() {
             meterResult = healthList[0]?.wellnessLevel + "/10"
         }
 
-        // if(healthList.length>0 && healthList[0].wellnessIndex && healthList[0].wellnessIndex!="N/A"){
-        //     let degree = -110+11*1+110;
-        //     meterTransformStyle = {  transform: `rotate(${degree}deg)` };
-        // }
-        // console.log("meterTransformStyle:::",meterTransformStyle)
+        if(healthList.length>0 && healthList[0].wellnessIndex && healthList[0].wellnessIndex!="N/A"){
+            let degree = -110+22*healthList[0].wellnessIndex;
+            meterTransformStyle = {  transform: `rotate(${degree}deg)` };
+        }
 
     return(
         <>
