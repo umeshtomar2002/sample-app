@@ -77,11 +77,11 @@ export default function currentReport() {
         wellnessIndex?: string,
         wellnessLevel?: string
     };
-    console.log("location.state:::::", JSON.stringify(location.state));
+    // console.log("location.state:::::", JSON.stringify(location.state));
     let binahData = location.state.data;
     if (location.state.page == 'binah') {
         const value: genericObj = {
-            familyId: location.state.familyId,
+            familyId: localStorage.getItem("familyId"),
             systolicBp: binahData.bloodPressure.value?.systolic != null && binahData.bloodPressure.value?.systolic != undefined && binahData.bloodPressure.value?.systolic != null ? binahData.bloodPressure.value?.systolic : 'N/A',
             diastolicBp: binahData.bloodPressure.value?.diastolic != null && binahData.bloodPressure.value?.diastolic != undefined && binahData.bloodPressure.value?.diastolic != null ? binahData.bloodPressure.value?.diastolic : 'N/A',
             breathingRate: binahData.breathingRate != null && binahData.breathingRate != undefined && binahData.breathingRate.value != null ? binahData.breathingRate.value : 'N/A',
@@ -125,7 +125,7 @@ export default function currentReport() {
     if (location.state.page == 'viewReport') {
         let fromDate = calcDate(location.state.data.report)
         const data = {
-            familyId: location.state.data.member,
+            familyId: localStorage.getItem("familyId"),
             fromDate: fromDate,
             toDate: calcDate(0),
             currentDate: fromDate == new Date().toISOString().substring(0, 10) ? true : false

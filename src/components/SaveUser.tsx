@@ -94,7 +94,7 @@ export default function saveUser() {
             weight: getData("weight"),
             height: getData("height"),
             userId: getData("userId"),
-            familyId:  getData("familyId"),
+            familyId: getData("familyId"),
         };
         console.log("initial data===>" + JSON.stringify(intialValues));
         return intialValues;
@@ -108,13 +108,14 @@ export default function saveUser() {
         let response = saveUserDetails(values)
         response.then((res) => {
             res.json().then(respData => {
-                navigate('/binah',{state:{familyId: respData.data.familyId}});
+                localStorage.setItem('familyId', respData.data.familyId);
+                navigate('/binah', { state: { familyId: respData.data.familyId } });
             });
         }).catch(error => {
             console.log("error =========> " + error.status);
         })
     }
-    const validateForm = (values) =>{
+    const validateForm = (values) => {
         type ErrorT = {
             fullname?: string;
             email?: string;
