@@ -28,8 +28,8 @@ export default function SidebarNew() {
         }else{
             setShowMenu(true);
         }
-        
     };
+
     useEffect(() => {
         window.addEventListener('resize', handleWindowResize);
         handleWindowResize();
@@ -38,6 +38,16 @@ export default function SidebarNew() {
         };
     });
 
+    const onScroll = () => {
+        if(showMenu && open){
+            setOpen(false);
+        } 
+    };
+
+    useEffect(() => {
+        window.addEventListener('scroll', onScroll, { passive: true });
+        return () => window.removeEventListener('scroll', onScroll);
+    });
 
     let navigate = useNavigate();
 

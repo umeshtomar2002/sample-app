@@ -215,7 +215,20 @@ export default function currentReport() {
                                                     <li key={id + d.familyId + "hg"} ><p className="r-icon"><img src={Hemoglobin} /> Hemoglobin</p><p><strong>{d.hemoglobinSign ? d.hemoglobinSign : "N/A"}</strong></p></li>
                                                     <li key={id + d.familyId + "sl"} ><p className="r-icon"><img src={StressLevel} /> Stress Level</p><p><strong>{d.stressLevel ? d.stressLevel : "N/A"}</strong></p></li>
                                                     <li key={id + d.familyId + "wi"} ><p className="r-icon"><img src={RecoveryAblity} /> Wellness Index</p><p><strong>{d.wellnessIndex ? d.wellnessIndex : "N/A"}</strong></p></li>
-                                                    <li key={id + d.familyId + "el"} ><p className="r-icon"><img src={HRVSDNN} /> Wellness Level</p><p><strong>{d.wellnessLevel ? d.wellnessLevel : "N/A"}</strong></p></li>
+                                                    <li key={id + d.familyId + "wl"} ><p className="r-icon"><img src={HRVSDNN} /> Wellness Level</p><p><strong>{d.wellnessLevel ? d.wellnessLevel : "N/A"}</strong></p></li>
+                                                    <li key={id + d.familyId + "hrvsdnn"} ><p className="r-icon"><img src={HRVSDNN} /> HRV-SDNN</p><p><strong>{d.hrvSdnn ? d.hrvSdnn : "N/A"}</strong></p></li>
+                                                    <li key={id + d.familyId + "lfhd"} ><p className="r-icon"><img src={HRVSDNN} /> LF/HF </p><p><strong>{d.lfhf ? d.lfhf : "N/A"}</strong></p></li>
+                                                    <li key={id + d.familyId + "meanRri"} ><p className="r-icon"><img src={HRVSDNN} /> Mean RRi</p><p><strong>{d.meanRri ? d.meanRri : "N/A"}</strong></p></li>
+                                                    <li key={id + d.familyId + "os"} ><p className="r-icon"><img src={HRVSDNN} /> Oxygen Saturation</p><p><strong>{d.oxygenSaturation ? d.oxygenSaturation : "N/A"}</strong></p></li>
+                                                    <li key={id + d.familyId + "pnsIndex"} ><p className="r-icon"><img src={HRVSDNN} /> PNS Index</p><p><strong>{d.pnsIndex ? d.pnsIndex : "N/A"}</strong></p></li>
+                                                    <li key={id + d.familyId + "pnsZone"} ><p className="r-icon"><img src={HRVSDNN} /> PNS Zone</p><p><strong>{d.pnsZone ? d.pnsZone : "N/A"}</strong></p></li>
+                                                    <li key={id + d.familyId + "rmssd"} ><p className="r-icon"><img src={HRVSDNN} /> RMSSD</p><p><strong>{d.rmssd ? d.rmssd : "N/A"}</strong></p></li>
+                                                    <li key={id + d.familyId + "sd1"} ><p className="r-icon"><img src={HRVSDNN} /> SD1</p><p><strong>{d.sd1 ? d.sd1 : "N/A"}</strong></p></li>
+                                                    <li key={id + d.familyId + "sd2"} ><p className="r-icon"><img src={HRVSDNN} /> SD2</p><p><strong>{d.sd2 ? d.sd2 : "N/A"}</strong></p></li>
+                                                    <li key={id + d.familyId + "sdnn"} ><p className="r-icon"><img src={HRVSDNN} /> SDNN</p><p><strong>{d.sdnn ? d.sdnn : "N/A"}</strong></p></li>
+                                                    <li key={id + d.familyId + "snsIndex"} ><p className="r-icon"><img src={HRVSDNN} /> SNS Index</p><p><strong>{d.snsIndex ? d.snsIndex : "N/A"}</strong></p></li>
+                                                    <li key={id + d.familyId + "snsZone"} ><p className="r-icon"><img src={RecoveryAblity} /> SNS Zone</p><p><strong>{d.snsZone ? d.snsZone : "N/A"}</strong></p></li>
+                                                    <li key={id + d.familyId + "stressIndex"} ><p className="r-icon"><img src={HRVSDNN} /> Stress Index</p><p><strong>{d.stressIndex ? d.stressIndex : "N/A"}</strong></p></li>
                                                     {/* <li><p className="r-icon"><img src={RecoveryAblity}/> Recovery Ability</p><p><strong>N/A</strong></p></li> */}
                                                     {/* <li><p className="r-icon"><img src={HRVSDNN}/> HRV-SDNN</p><p><strong>{d.hrvSdnn}</strong></p></li> */}
                                                 </span>
