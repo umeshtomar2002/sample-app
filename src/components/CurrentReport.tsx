@@ -26,7 +26,7 @@ export default function currentReport() {
     const [healthList, setHealthList] = useState([])
     const [spinner, setSpinner] = useState(false)
     let meterTransformStyle = { transform: "rotate(-110deg)" };
-
+ 
     function binahPage() {
         navigate('/binah');
     }
@@ -108,17 +108,16 @@ export default function currentReport() {
             wellnessLevel: binahData.wellnessLevel != null && binahData.wellnessLevel != undefined && binahData.wellnessLevel.value != null ? binahData.wellnessLevel.value : 'N/A',
         }
         useEffect(() => {
-            setSpinner(true);
-            setHealthList([value]);
-            saveHealthData(value)
-                .then((res) => {
-                    console.log("success=>" + JSON.stringify(res));
-                    setSpinner(false);
-                })
-                .catch((err) => {
-                    setSpinner(false);
-                    console.log("error => " + err);
-                });
+          setSpinner(true);
+          setHealthList([value]);
+          saveHealthData(value)
+            .then((res) => {
+              setSpinner(false);
+            })
+            .catch((err) => {
+              setSpinner(false);
+              console.log("error => " + err);
+            });
         }, []);
     }
 
@@ -204,7 +203,7 @@ export default function currentReport() {
                                     {healthList.map((d, id) => {
                                         return (
                                             <>
-                                                <span className="reportBreak" key={id + "time"}>{((d && d.updatedAt) ? (new Date(d.updatedAt)) : (new Date())).toLocaleString()}</span>
+                                                <span className="reportBreak" key={id + "time"}>{((d && d.createdAt) ? (new Date(d.createdAt)) : (new Date())).toLocaleString()}</span>
                                                 <span key={id}>
                                                     <li key={id + d.familyId + "hr"} ><p className="r-icon"><img src={Heartrate} /> Heart Rate</p><p><strong>{d.heartRate ? d.heartRate : "N/A"}</strong></p></li>
                                                     <li key={id + d.familyId + "br"} ><p className="r-icon"><img src={Breathrate} /> Breathing Rate</p><p><strong>{d.breathingRate ? d.breathingRate : "N/A"}</strong></p></li>
@@ -239,7 +238,7 @@ export default function currentReport() {
 
                                 </ul>
                                 <p id="reportButtons" className="clear text-center">
-                                    <a href="#" className="button icon solid fa-share"> Share</a> &nbsp;
+                                <a href="#" className="button icon solid fa-share"> Share</a> &nbsp;
                                     <a href="#" className="button primary" onClick={() => binahPage()}> Test Again</a>
                                 </p>
                             </div>

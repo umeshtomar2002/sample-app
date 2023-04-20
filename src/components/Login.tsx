@@ -103,7 +103,7 @@ export default function Login() {
                                             onSubmit={(values, { setSubmitting }) => {
                                                 //alert(JSON.stringify(values));
                                                 checkLogin(values).then((res) => {
-                                                    console.log(res);
+                                                    // console.log(res);
                                                     navigate('/addUser');
                                                     //setSubmitting(true);                                                   
                                                 }).catch(error => {

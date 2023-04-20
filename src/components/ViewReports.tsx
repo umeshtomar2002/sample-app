@@ -66,7 +66,7 @@ export default function viewReport() {
                                 onSubmit={(values, { setSubmitting }) => {
                                     let state = { page: 'viewReport', data: values }
                                     localStorage.setItem('familyId', values.member);
-                                    console.log(JSON.stringify(values));
+                                    // console.log(JSON.stringify(values));
                                     navigate('/currentReport', { state });
                                 }}>
                                 {({
