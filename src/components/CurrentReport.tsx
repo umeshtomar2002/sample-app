@@ -31,6 +31,23 @@ export default function currentReport() {
         navigate('/binah');
     }
 
+    const getWhatsappLink = () => {       
+        if(healthList.length>0){
+            let message=""
+            for (let i=0;i<healthList.length;i++) {
+                message = message+getMessage(healthList[i]);
+            }
+            return `https://api.whatsapp.com/send?text=${message}`
+        }
+    }
+
+    const getMessage = (data) => {
+        let time = (location.state.page == 'binah') ? new Date().toLocaleString() : new Date(data.createdAt).toLocaleString()
+        delete data.updatedAt;
+        delete data.familyId;
+        return `--- ${time} ---%0a`+JSON.stringify(data).replace(/,/g, '%0a').replace(/["'}{]/g,"")+"%0a%0a"
+    }
+
     function CurrentDatetime() {
         const date = new Date();
         const datela = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
@@ -238,7 +255,9 @@ export default function currentReport() {
 
                                 </ul>
                                 <p id="reportButtons" className="clear text-center">
-                                <a href="#" className="button icon solid fa-share"> Share</a> &nbsp;
+                                    <a href={getWhatsappLink()} data-action="share/whatsapp/share" target="_blank"
+                                        className="button icon solid fa-share"> Share</a>
+                                    &nbsp;
                                     <a href="#" className="button primary" onClick={() => binahPage()}> Test Again</a>
                                 </p>
                             </div>
