@@ -162,13 +162,15 @@ export default function currentReport() {
         }, []);
     }
     let meterResult = "N/A"
+    let indicator = "low"
     if (healthList.length > 0 && healthList[0].wellnessLevel && healthList[0].wellnessLevel != "N/A") {
         meterResult = healthList[0]?.wellnessLevel + "/10"
     }
-
     if (healthList.length > 0 && healthList[0].wellnessIndex && healthList[0].wellnessIndex != "N/A") {
         let degree = -110 + 22 * healthList[0].wellnessIndex;
         meterTransformStyle = { transform: `rotate(${degree}deg)` };
+        let indicatorSign = ["low","medium","high"]
+        indicator = indicatorSign[(Math.round(healthList[0].wellnessIndex / 3.33))-1]     
     }
 
     return (
@@ -207,7 +209,7 @@ export default function currentReport() {
                                         <h3>{meterResult}</h3>
                                     </div>
 
-                                    <div className="result-score-text"><h3>Your Welness Score is low.</h3>
+                                    <div className="result-score-text"><h3>Your Welness Score is {indicator}.</h3>
                                         <p>The Wellness Score is based on the vital signs measured by Binah's technology, and is designed to serve as reference when measured at rest, under similar conditions during all of the measurements over time.</p>
                                         <p><i>*The measured indicators are not intended for medical use</i></p></div>
                                 </div>
