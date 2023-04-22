@@ -163,15 +163,22 @@ export default function currentReport() {
     }
     let meterResult = "N/A"
     let indicator = "low"
+    
     if (healthList.length > 0 && healthList[0].wellnessLevel && healthList[0].wellnessLevel != "N/A") {
-        meterResult = healthList[0]?.wellnessLevel + "/10"
+        let indicatorSign = ["low","medium","high"]
+        // indicator = indicatorSign[(Math.round(healthList[0].wellnessIndex / 3.33))-1]     
+        indicator = indicatorSign[(healthList[0].wellnessLevel)-1] 
+        // console.log("wellnessLevel:::", healthList[0].wellnessLevel)
+    
     }
     if (healthList.length > 0 && healthList[0].wellnessIndex && healthList[0].wellnessIndex != "N/A") {
+        meterResult = healthList[0]?.wellnessIndex + "/10"
         let degree = -110 + 22 * healthList[0].wellnessIndex;
         meterTransformStyle = { transform: `rotate(${degree}deg)` };
-        let indicatorSign = ["low","medium","high"]
-        indicator = indicatorSign[(Math.round(healthList[0].wellnessIndex / 3.33))-1]     
+        // console.log("wellnessIndex:::", healthList[0].wellnessIndex)
     }
+
+
 
     return (
         <>
@@ -227,8 +234,9 @@ export default function currentReport() {
                                                     <li key={id + d.familyId + "hr"} ><p className="r-icon"><img src={Heartrate} /> Heart Rate</p><p><strong>{d.heartRate ? d.heartRate : "N/A"}</strong></p></li>
                                                     <li key={id + d.familyId + "br"} ><p className="r-icon"><img src={Breathrate} /> Breathing Rate</p><p><strong>{d.breathingRate ? d.breathingRate : "N/A"}</strong></p></li>
                                                     <li key={id + d.familyId + "prq"} ><p className="r-icon"><img src={PQR} /> PRQ</p><p><strong>{d.prq ? d.prq : "N/A"}</strong></p></li>
-                                                    <li key={id + d.familyId + "bp-d"} ><p className="r-icon"><img src={SpO2} /> Blood Pressure(D)</p><p><strong>{d.diastolicBp ? d.diastolicBp : "N/A"}</strong></p></li>
-                                                    <li key={id + d.familyId + "bp-s"} ><p className="r-icon"><img src={StressResponse} /> Blood Pressure(S)</p><p><strong>{d.systolicBp ? d.systolicBp : "N/A"}</strong></p></li>
+                                                    {/* <li key={id + d.familyId + "bp-d"} ><p className="r-icon"><img src={SpO2} /> Blood Pressure(D)</p><p><strong>{d.diastolicBp ? d.diastolicBp : "N/A"}</strong></p></li> */}
+                                                    {/* <li key={id + d.familyId + "bp-s"} ><p className="r-icon"><img src={StressResponse} /> Blood Pressure(S)</p><p><strong>{d.systolicBp ? d.systolicBp : "N/A"}</strong></p></li> */}
+                                                    <li key={id + d.familyId + "bp-s"} ><p className="r-icon"><img src={HRVSDNN} /> Blood Pressure</p><p><strong>{(d.systolicBp && d.diastolicBp) ? (d.systolicBp+"/"+d.diastolicBp) : "N/A"}</strong></p></li>
                                                     <li key={id + d.familyId + "hga1"} ><p className="r-icon"><img src={HemoglobinA1c} /> Hemoglobin A1c</p><p><strong>{d.hemoglobinA1C ? d.hemoglobinA1C : "N/A"}</strong></p></li>
                                                     <li key={id + d.familyId + "hg"} ><p className="r-icon"><img src={Hemoglobin} /> Hemoglobin</p><p><strong>{d.hemoglobinSign ? d.hemoglobinSign : "N/A"}</strong></p></li>
                                                     <li key={id + d.familyId + "sl"} ><p className="r-icon"><img src={StressLevel} /> Stress Level</p><p><strong>{d.stressLevel ? d.stressLevel : "N/A"}</strong></p></li>
