@@ -7,7 +7,7 @@ import ScanSvg from '../assets/images/scan.svg';
 import ReportSvg from '../assets/images/report.svg';
 import LogoutSvg from '../assets/images/logout.svg';
 import Menu from '../assets/images/menu1.svg';
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function SidebarNew() {
 
@@ -64,7 +64,9 @@ export default function SidebarNew() {
     }
 
     function loginPage() {
-        // navigate('/',"replace");
+        // navigate('/');
+        localStorage.clear();
+        
     }
 
 
@@ -84,7 +86,8 @@ export default function SidebarNew() {
                                {/* <li><a href="#" onClick={() => addUserPage()}><img src={Myprofile} alt="" /> My Profile</a></li> */}
                                <li><a href="#" onClick={() => addUserPage()}><img src={ScanSvg} alt="" />Home</a></li>
                                <li><a href="#" onClick={() => viewReportPage()}><img src={ReportSvg} alt="" /> View Reports</a></li>
-                               <li><a href="#"><img src={LogoutSvg} onClick={() => loginPage()} alt="" /> Logout</a></li>
+                               <li><Link to="/"  onClick={() => loginPage()}><img src={LogoutSvg} alt="" /> Logout</Link></li>
+                               {/* <li><a><img src={LogoutSvg} onClick={() => loginPage()} alt="" /> Logout</a></li> */}                             
                            </ul>
                        </nav>
                        {/* <div className="bottom_menu"><img src={MenuBack}/></div> */}

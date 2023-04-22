@@ -1,31 +1,29 @@
-import React, { useState } from 'react';
-import ReactDOM from 'react-dom'; 
+import React from 'react';
 import BinahSdkImpl from './BinahSdkImpl';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Login from './Login';
 import AddUser from './AddUser';
 import SaveUser from './SaveUser';
 import ViewReports from './ViewReports';
 import PerformTest from './PerformTest';
 import CurrentReport from './CurrentReport';
-import LayoutPage from './LayoutPage';
+import ProtectedRoute from './utils/ProtectedRoute';
 
 export default function App() {
 
-        return (
-            <>
-              <Routes>
-                <Route path="/" element={<Login/>} />           
-                <Route path="addUser" element={<AddUser />} />              
-                <Route path="binah" element={<BinahSdkImpl />} />
-                <Route path="saveUser" element={<SaveUser />} />
-                <Route path="viewReport" element={<ViewReports/>} />
-                <Route path="performTest" element={<PerformTest/>} />
-                <Route path="currentReport" element={<CurrentReport/>} />
-                <Route path="layout" element={<LayoutPage/>} />                                
-            </Routes>
-            </>
+  return (
+    <>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="addUser" element={<ProtectedRoute Component={AddUser} />} />
+        <Route path="binah" element={<ProtectedRoute Component={BinahSdkImpl} />} />
+        <Route path="saveUser" element={<ProtectedRoute Component={SaveUser} />} />
+        <Route path="viewReport" element={<ProtectedRoute Component={ViewReports} />} />
+        <Route path="performTest" element={<ProtectedRoute Component={PerformTest} />} />
+        <Route path="currentReport" element={<ProtectedRoute Component={CurrentReport} />} />
+      </Routes>
+    </>
 
-              
-        )     
+
+  )
 }

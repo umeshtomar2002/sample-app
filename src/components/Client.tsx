@@ -1,19 +1,26 @@
 import { json } from 'react-router';
 import fetch from 'unfetch';
+import { Route, useNavigate } from "react-router-dom";
 
 
 const url:string = "https://binah.onrender.com";
 
-function checkStatus(response:any) {    
+function authenticate(response:any) {   
     if (response.ok) {       
         return response;
     } else{
-         let error = new Error(response.statusText);
+        console.log("response:::",response)
+        let error = new Error(response.statusText);
+        if(response.status == 401){
+            console.log("Unauthorized");
+            localStorage.clear();
+            window.location.replace('/');
+        }
         // // error.response = response;
         // // response.json().then(e => {            
         // //     error.error = e;
         // // });
-         return Promise.reject(error);
+        return Promise.reject(error);
     }
 }
 
@@ -40,9 +47,9 @@ export const checkLogin = (loginDetails) =>
             method:'POST',
             body: JSON.stringify(loginDetails)
         }).then(async response => JSON.parse(await response.text())).then(loginStatus);
-
-function loginStatus(response:any) {    
-    if (!response.error) {
+        
+        function loginStatus(response:any) {    
+            if (!response.error) {
              localStorage.setItem('x-access-token',response.data.token);
              localStorage.setItem('biUser',JSON.stringify(response.data));  
         return response;
@@ -64,7 +71,7 @@ export const getfamilyDetails = (values) =>fetch(url+'/api/getFamily',{
     },
     method:'GET',
     body: JSON.stringify(values)    
-}).then(checkStatus);
+}).then(authenticate);
 
 
 export const saveUserDetails= (userDetails) => fetch(url+'/api/addFamily',{
@@ -74,7 +81,7 @@ export const saveUserDetails= (userDetails) => fetch(url+'/api/addFamily',{
     },
     method:'POST',
     body: JSON.stringify(userDetails)
-}).then(checkStatus);
+}).then(authenticate);
 export const getloginUserDetails = () => {    
     return JSON.parse(localStorage.getItem('biUser')).userId;
 }
@@ -86,20 +93,7 @@ export const saveHealthData= (userDetails) => fetch(url+'/api/saveReport',{
     },
     method:'POST',
     body: JSON.stringify(userDetails)
-}).then(healthSaveCheck);
-
-function healthSaveCheck(response:any) {    
-    if (response.ok) {       
-        return response;
-    } else{
-         let error = new Error(response.statusText);
-        // // error.response = response;
-        // // response.json().then(e => {            
-        // //     error.error = e;
-        // // });
-         return Promise.reject(error);
-    }
-}
+}).then(authenticate);
 
 export const getHealthData = (health) =>fetch(url+'/api/getReports',{
     headers:{
@@ -108,4 +102,4 @@ export const getHealthData = (health) =>fetch(url+'/api/getReports',{
     },
     method:'POST',
     body: JSON.stringify(health)
-}).then(healthSaveCheck);
+}).then(authenticate);
