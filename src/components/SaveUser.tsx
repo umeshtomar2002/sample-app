@@ -6,6 +6,8 @@ import { Button, Input, Switch, Tag } from "antd";
 import { getloginUserDetails, saveUserDetails } from "./Client";
 import SidebarNew from "./SidebarNew";
 import { CalendarOutlined } from "@ant-design/icons";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 
 const tagStyle = { color: 'red' };
 
@@ -115,7 +117,7 @@ export default function saveUser() {
             console.log("error =========> " + error.status);
         })
     }
-    const validateForm = (values) => {
+    const validateForm = (values) => {        
         type ErrorT = {
             fullname?: string;
             email?: string;
@@ -137,7 +139,7 @@ export default function saveUser() {
         }
         if (!values.mobileNo) {
             errors.mobileNo = 'Please enter your contact number.';
-        } else if (values.mobileNo.length != 10) {
+        } else if (values.mobileNo.split(" ")[1]?.replaceAll(["-"],"").length != 10) {
             errors.mobileNo = 'mobile number must be 10 digits';
         }
         if (!values.dob) {
@@ -232,14 +234,27 @@ export default function saveUser() {
                                                 {errors.email && touched.email && errors.email && <Tag style={tagStyle}>{errors.email}</Tag>}
                                             </div>
                                             <div className="col-6 col-12-xsmall">
-                                                <Input
+                                                <PhoneInput
+                                                    country={"in"}
+                                                    placeholder='Enter Mobile No.'
+                                                    enableSearch
+                                                    onBlur={handleBlur}
+                                                    value={values.mobileNo}
+                                                    preferredCountries={['in','my']}
+                                                    onChange={(val, country, e)=>{handleChange(e)}} 
+                                                    inputProps={{
+                                                        name: "mobileNo",
+                                                    }}
+                                                    inputStyle={{width:"100%"}}                                                    
+                                                />
+                                                {/* <Input
                                                     type="text"
                                                     name="mobileNo"
                                                     onChange={handleChange}
                                                     onBlur={handleBlur}
                                                     value={values.mobileNo}
                                                     placeholder='Enter Mobile No.'
-                                                />
+                                                /> */}
                                                 {errors.mobileNo && touched.mobileNo && errors.mobileNo && <Tag style={tagStyle}>{errors.mobileNo}</Tag>}
                                             </div>
                                             <div id="my-radio-group" className="col-2 col-12-small">Date of birth</div>
