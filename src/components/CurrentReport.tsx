@@ -222,6 +222,7 @@ export default function currentReport() {
                                 </div>
 
                                 {spinner && <Spinner />}
+                                <p id="parameter_disclaimer">** Marked parameters are presently under clinical research.</p>
 
                                 <ul className="result">
 
@@ -237,7 +238,7 @@ export default function currentReport() {
                                                     {/* <li key={id + d.familyId + "bp-d"} ><p className="r-icon"><img src={SpO2} /> Blood Pressure(D)</p><p><strong>{d.diastolicBp ? d.diastolicBp : "N/A"}</strong></p></li> */}
                                                     {/* <li key={id + d.familyId + "bp-s"} ><p className="r-icon"><img src={StressResponse} /> Blood Pressure(S)</p><p><strong>{d.systolicBp ? d.systolicBp : "N/A"}</strong></p></li> */}
                                                     <li key={id + d.familyId + "bp-s"} ><p className="r-icon"><img src={HRVSDNN} /> Blood Pressure</p><p><strong>{(d.systolicBp && d.diastolicBp) ? (d.systolicBp+"/"+d.diastolicBp) : "N/A"}</strong></p></li>
-                                                    <li key={id + d.familyId + "hga1"} ><p className="r-icon"><img src={HemoglobinA1c} /> Hemoglobin A1c</p><p><strong>{d.hemoglobinA1C ? d.hemoglobinA1C : "N/A"}</strong></p></li>
+                                                    <li key={id + d.familyId + "hga1"} ><p className="r-icon"><img src={HemoglobinA1c} /> Hemoglobin A1c**</p><p><strong>{d.hemoglobinA1C ? d.hemoglobinA1C : "N/A"}</strong></p></li>
                                                     <li key={id + d.familyId + "hg"} ><p className="r-icon"><img src={Hemoglobin} /> Hemoglobin</p><p><strong>{d.hemoglobinSign ? d.hemoglobinSign : "N/A"}</strong></p></li>
                                                     <li key={id + d.familyId + "sl"} ><p className="r-icon"><img src={StressLevel} /> Stress Level</p><p><strong>{d.stressLevel ? d.stressLevel : "N/A"}</strong></p></li>
                                                     <li key={id + d.familyId + "wi"} ><p className="r-icon"><img src={RecoveryAblity} /> Wellness Index</p><p><strong>{d.wellnessIndex ? d.wellnessIndex : "N/A"}</strong></p></li>

@@ -38,6 +38,11 @@ svg {
   margin-bottom: 20px;
 }
 
+#parameter_disclaimer{
+  font-size: 10px;
+  text-align:right;
+  color:red
+}
 .meter h3 {
   display: block;
   text-align: center;

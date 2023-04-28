@@ -56,7 +56,7 @@ export default function AddUser() {
                     <section id="banner">
                         <div className="content">
                             <header>
-                                <h1>Hello</h1>
+                                <h1>Hi apa khabar! </h1>
                                 <p>Whom do you want to test today ?</p>
                             </header>
                             <ul className="actions">

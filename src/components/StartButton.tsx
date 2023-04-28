@@ -26,6 +26,8 @@ const Button = styled.div`
   cursor: pointer;
   height: inherit;
   width: inherit;
+  color: white;
+  text-align: center;
 `;
 
 const Icon = styled.img`
@@ -58,7 +60,8 @@ const StartButton = ({ isLoading, onClick, isMeasuring }: IStartButton) => {
         <Spinner />
       ) : (
         <Button onClick={onClick}>
-          <Icon src={isMeasuring ? Stop : Play} />
+          {isMeasuring ? "Stop" : "Measure Now"}
+          {/* <Icon src={isMeasuring ? Stop : Play} /> */}
         </Button>
       )}
     </Container>
