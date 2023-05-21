@@ -5,7 +5,7 @@ import { checkLogin } from "./Client";
 import { useNavigate } from "react-router-dom";
 import LoginSvg from '../assets/images/Logo.svg';
 // import LoginBanner from '../assets/images/loginBanner.jpeg';
-import LoginBanner from '../assets/images/loginBanner_converted.svg';
+import LoginBanner from '../assets/images/loginFinalBanner.svg';
 // const LoginBanner =  require("../assets/images/loginBanner.jpeg") as string;
 
 

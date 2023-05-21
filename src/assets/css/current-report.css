@@ -72,3 +72,9 @@ svg {
   margin: 4px 0;
 
 }
+.meterResult{
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 0%);
+}
