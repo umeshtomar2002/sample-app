@@ -26,7 +26,7 @@ export default function currentReport() {
     const [healthList, setHealthList] = useState([])
     const [spinner, setSpinner] = useState(false)
     let meterTransformStyle = { transform: "rotate(-110deg)" };
-
+   
     function binahPage() {
         navigate('/binah');
     }
@@ -161,23 +161,30 @@ export default function currentReport() {
             );
         }, []);
     }
-    let meterResult = "N/A"
-    let indicator = "low"
+    
+    const getMeterResult = (index) => {
+        let meterResult = "N/A"
 
-    if (healthList.length > 0 && healthList[0].wellnessLevel && healthList[0].wellnessLevel != "N/A") {
-        let indicatorSign = ["low", "medium", "high"]
-        // indicator = indicatorSign[(Math.round(healthList[0].wellnessIndex / 3.33))-1]     
-        indicator = indicatorSign[(healthList[0].wellnessLevel) - 1]
-        // console.log("wellnessLevel:::", healthList[0].wellnessLevel)
-
-    }
-    if (healthList.length > 0 && healthList[0].wellnessIndex && healthList[0].wellnessIndex != "N/A") {
-        meterResult = healthList[0]?.wellnessIndex + "/10"
-        let degree = -110 + 22 * healthList[0].wellnessIndex;
-        meterTransformStyle = { transform: `rotate(${degree}deg)` };
-        // console.log("wellnessIndex:::", healthList[0].wellnessIndex)
+        if (healthList.length > 0 && healthList[index].wellnessIndex && healthList[index].wellnessIndex != "N/A") {
+            meterResult = healthList[index]?.wellnessIndex + "/10"
+            let degree = -110 + 22 * healthList[index].wellnessIndex;
+            meterTransformStyle = { transform: `rotate(${degree}deg)` };
+            // console.log("wellnessIndex:::", healthList[0].wellnessIndex)
+        }
+        return meterResult
     }
 
+    const getIndicator = (index) => {
+        let indicator = "low"
+        if (healthList.length > 0 && healthList[index].wellnessLevel && healthList[index].wellnessLevel != "N/A") {
+            let indicatorSign = ["low", "medium", "high"]
+            // indicator = indicatorSign[(Math.round(healthList[index].wellnessIndex / 3.33))-1]     
+            indicator = indicatorSign[(healthList[index].wellnessLevel) - 1]
+            // console.log("wellnessLevel:::", healthList[index].wellnessLevel)
+    
+        }
+        return indicator
+    }
 
     const getBloodPressure = (d) => {
         if (d.systolicBp && d.diastolicBp && d.systolicB != "N/A" && d.diastolicBp != "N/A") {
@@ -186,18 +193,23 @@ export default function currentReport() {
         return "N/A"
     }
 
-
-    return (
-        <>
-            <div id="wrapper">
-                <div id="main">
-                    <div className="inner">
-
-                        <section id="banner">
-                            <div className="content">
+    const getCurrentReport = () => {
+        if(healthList.length>0){
+            return(
+                <div className="content">
                                 <CurrentDatetime />
 
-                                <div className="score">
+                               
+
+                                {spinner && <Spinner />}
+
+                                <ul className="result">
+                                    {healthList.map((d, id) => {
+                                        return (
+                                            <>
+                                                <span className="reportBreak" key={id + "time"}>{((d && d.createdAt) ? (new Date(d.createdAt)) : (new Date())).toLocaleString()}</span>
+
+                                                 <div className="score">
                                     <div className="meter">
                                         <svg viewBox="10.803 2.322 487.13 351.337"  id="meter" width="327" height="180" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <rect x="21.501" y="25.69" width="445.016" height="312.142" fill="#db0000"></rect>
@@ -221,23 +233,14 @@ export default function currentReport() {
                                                 </linearGradient>
                                             </defs>
                                         </svg>
-                                        <h3 className="meterResult">{meterResult}</h3>
+                                        <h3 className="meterResult">{getMeterResult(id)}</h3>
                                     </div>
 
-                                    <div className="result-score-text"><h3>Your Welness Score is {indicator}.</h3>
+                                    <div className="result-score-text"><h3>Your Wellness Score is {getIndicator(id)}.</h3>
                                         <p>The Wellness Score is based on the vital signs measured by Binah's technology, and is designed to serve as reference when measured at rest, under similar conditions during all of the measurements over time.</p>
                                         <p><i>*The measured indicators are not intended for medical use</i></p></div>
                                 </div>
 
-                                {spinner && <Spinner />}
-
-                                <ul className="result">
-
-
-                                    {healthList.map((d, id) => {
-                                        return (
-                                            <>
-                                                <span className="reportBreak" key={id + "time"}>{((d && d.createdAt) ? (new Date(d.createdAt)) : (new Date())).toLocaleString()}</span>
                                                 <span key={id}>
                                                     <li key={id + d.familyId + "hr"} ><p className="r-icon"><img src={Heartrate} /> Heart Rate</p><p><strong>{d.heartRate ? d.heartRate : "N/A"}</strong></p></li>
                                                     <li key={id + d.familyId + "br"} ><p className="r-icon"><img src={Breathrate} /> Breathing Rate</p><p><strong>{d.breathingRate ? d.breathingRate : "N/A"}</strong></p></li>
@@ -280,6 +283,22 @@ export default function currentReport() {
                                     <a href="#" className="button primary" onClick={() => binahPage()}> Test Again</a>
                                 </p>
                             </div>
+            )
+        }
+        return (
+            <div>No Records Found</div>
+        )
+    }
+
+
+    return (
+        <>
+            <div id="wrapper">
+                <div id="main">
+                    <div className="inner">
+
+                        <section id="banner">
+                            {getCurrentReport()}
                         </section>
                     </div></div>
                 <SidebarNew />

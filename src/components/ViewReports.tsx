@@ -5,12 +5,13 @@ import { useNavigate } from "react-router-dom";
 import "../assets/css/main.css";
 import { useLocation } from "react-router-dom";
 import SidebarNew from "./SidebarNew";
-import { getfamilyDetails, getloginUserDetails } from "./Client";
+import { getHealthData, getfamilyDetails, getloginUserDetails } from "./Client";
 
 export default function viewReport() {
 
     let navigate = useNavigate();
     let location = useLocation()
+    const [error,setError]= useState("")
 
     const tagStyle = { backgroundColor: '#f50' };
 
@@ -24,10 +25,16 @@ export default function viewReport() {
         getfamilyDetails(userDetails).then(res => res.json().then(family1 => { setFamily(family1.data) }));
     }, []);
 
+    // const calcDate = (days: number) => {
+    //     var date = new Date();
+    //     date.setDate(date.getDate() - days);
+    //     return date.getFullYear() + '-' + date.getMonth() + '-' + date.getDay();
+    // }
+
     const calcDate = (days: number) => {
         var date = new Date();
         date.setDate(date.getDate() - days);
-        return date.getFullYear() + '-' + date.getMonth() + '-' + date.getDay();
+        return date.getFullYear() + '-' + (date.getMonth() + 1).toString().padStart(2, "0") + '-' + date.getDate().toString().padStart(2, "0");
     }
 
     return (
@@ -61,13 +68,40 @@ export default function viewReport() {
                                     if (values.report == '') {
                                         errors.report = 'Select period';
                                     }
+                                    setError("")                          
                                     return errors;
                                 }}
                                 onSubmit={(values, { setSubmitting }) => {
-                                    let state = { page: 'viewReport', data: values }
-                                    localStorage.setItem('familyId', values.member);
-                                    // console.log(JSON.stringify(values));
-                                    navigate('/currentReport', { state });
+                                    console.log("report::::", values.report);
+                                    
+                                    let fromDate = calcDate(parseInt(values.report))
+                                    const data = {
+                                        familyId: localStorage.getItem("familyId"),
+                                        fromDate: fromDate,
+                                        toDate: calcDate(0),
+                                        currentDate: fromDate == new Date().toISOString().substring(0, 10) ? true : false
+                                    }
+                                    console.log("datadatadata::::", data);
+
+                                    let response = getHealthData(data)
+                                    response.then((res) => {
+                                        res.json().then(respData => {
+                                            console.log("respData.data::::",respData.data);
+                                            console.log("values.member::::",values.member);
+                                            
+                                            if(respData.data.length > 0){
+                                                let state = { page: 'viewReport', data: values }
+                                                localStorage.setItem('familyId', values.member);
+                                                navigate('/currentReport', { state });
+                                            }else{
+                                                setError("No Data Found")
+                                            }
+                                        });
+                                    }).catch(error => {
+                                        console.log("error =========> " + error.status);
+                                    })
+
+
                                 }}>
                                 {({
                                     values,
@@ -123,7 +157,7 @@ export default function viewReport() {
 
                                                 {errors.report && touched.report && errors.report && <Tag style={tagStyle}>{errors.report}</Tag>}
                                             </div>
-
+                                                { error && <div>{error}</div>}
                                             <div className="col-12 mt-20">
                                                 <ul className="actions">
                                                     <li><Button className="primary" onClick={() => submitForm()}> Submit </Button></li>
