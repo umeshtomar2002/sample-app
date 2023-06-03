@@ -8,6 +8,7 @@ import ViewReports from './ViewReports';
 import PerformTest from './PerformTest';
 import CurrentReport from './CurrentReport';
 import ProtectedRoute from './utils/ProtectedRoute';
+import TermsCondition from './TermsCondition';
 
 export default function App() {
 
@@ -21,6 +22,7 @@ export default function App() {
         <Route path="viewReport" element={<ProtectedRoute Component={ViewReports} />} />
         <Route path="performTest" element={<ProtectedRoute Component={PerformTest} />} />
         <Route path="currentReport" element={<ProtectedRoute Component={CurrentReport} />} />
+        <Route path="TermsAndCondition" element={<TermsCondition />} />
       </Routes>
     </>
 

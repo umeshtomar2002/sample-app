@@ -164,7 +164,7 @@ export default function Login() {
                                                             </div>
                                                             <div className="">
                                                                 <div className="col-3 col-12-xsmall">
-                                                                    <span style={usrAgfosize}> By pressing "Login" you will accept Drivn Fintech's <a target="_blank" href="https://www.binah.ai/terms-of-use/"><span style={usrAgfosizeColor}> terms & conditions</span></a>.</span>
+                                                                    <span style={usrAgfosize}> By pressing "Login" you will accept Drivn Fintech's <a target="_blank" href="/TermsAndCondition"><span style={usrAgfosizeColor}> terms & conditions</span></a>.</span>
                                                                 </div>
                                                             </div>
                                                             <div style={errorMessageStyle}>{errorMessage && <div> {errorMessage} </div>}</div>

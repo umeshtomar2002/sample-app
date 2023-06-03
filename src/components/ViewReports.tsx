@@ -6,6 +6,7 @@ import "../assets/css/main.css";
 import { useLocation } from "react-router-dom";
 import SidebarNew from "./SidebarNew";
 import { getHealthData, getfamilyDetails, getloginUserDetails } from "./Client";
+import Select from 'react-select';
 
 export default function viewReport() {
 
@@ -35,6 +36,20 @@ export default function viewReport() {
         var date = new Date();
         date.setDate(date.getDate() - days);
         return date.getFullYear() + '-' + (date.getMonth() + 1).toString().padStart(2, "0") + '-' + date.getDate().toString().padStart(2, "0");
+    }
+
+    const getCurrentDate = () => {
+        var date = new Date();
+        return date.getFullYear() + '-' + (date.getMonth() + 1).toString().padStart(2, "0") + '-' + date.getDate().toString().padStart(2, "0");
+    }
+
+    const getOptions = () => {
+        let options = []
+        {family.map((data, id) => {
+            options.push({"value":data.familyId, "label":data.fullname})
+        })} 
+
+        return options;
     }
 
     return (
@@ -73,25 +88,23 @@ export default function viewReport() {
                                 }}
                                 onSubmit={(values, { setSubmitting }) => {
                                     console.log("report::::", values.report);
-                                    
+                                    let state = { page: 'viewReport', data: values }
+                                    localStorage.setItem('familyId', values.member);
                                     let fromDate = calcDate(parseInt(values.report))
                                     const data = {
                                         familyId: localStorage.getItem("familyId"),
                                         fromDate: fromDate,
                                         toDate: calcDate(0),
-                                        currentDate: fromDate == new Date().toISOString().substring(0, 10) ? true : false
+                                        currentDate: fromDate == getCurrentDate() ? true : false
                                     }
-                                    console.log("datadatadata::::", data);
+                                    console.log("header::::", data);
 
                                     let response = getHealthData(data)
                                     response.then((res) => {
                                         res.json().then(respData => {
-                                            console.log("respData.data::::",respData.data);
-                                            console.log("values.member::::",values.member);
-                                            
                                             if(respData.data.length > 0){
-                                                let state = { page: 'viewReport', data: values }
-                                                localStorage.setItem('familyId', values.member);
+                                                // let state = { page: 'viewReport', data: values }
+                                                // localStorage.setItem('familyId', values.member);
                                                 navigate('/currentReport', { state });
                                             }else{
                                                 setError("No Data Found")
@@ -117,8 +130,15 @@ export default function viewReport() {
                                         <div className="row gtr-uniform">
                                             <div className="col-8 col-12-xsmall">
 
-
-                                                <select
+                                            <Select
+                                                // value={values.member}
+                                                // style={{ display: "block" }}
+                                                onChange={(e) => {values.member=e.value}}
+                                                placeholder="Select Member"
+                                                // onChange={(e) => {saveUserPage('update', e.target.value)}}
+                                                options={getOptions()}
+                                            />
+                                                {/* <select
                                                     name="member"
                                                     value={values.member}
                                                     onChange={handleChange}
@@ -133,7 +153,8 @@ export default function viewReport() {
                                                             {data.fullname}
                                                         </option>
                                                     })}
-                                                </select>
+                                                </select> */}
+                                                
                                                 {errors.member && touched.member && errors.member && <Tag style={tagStyle}>{errors.member}</Tag>}
                                             </div>
                                             <div className="col-4 col-12-xsmall">

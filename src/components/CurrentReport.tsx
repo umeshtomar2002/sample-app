@@ -65,6 +65,12 @@ export default function currentReport() {
         return date.getFullYear() + '-' + (date.getMonth() + 1).toString().padStart(2, "0") + '-' + date.getDate().toString().padStart(2, "0");
     }
 
+    
+    const getCurrentDate = () => {
+        var date = new Date();
+        return date.getFullYear() + '-' + (date.getMonth() + 1).toString().padStart(2, "0") + '-' + date.getDate().toString().padStart(2, "0");
+    }
+
     type genericObj = {
         familyId?: string,
         // bloodPressure?:string,   					
@@ -144,7 +150,7 @@ export default function currentReport() {
             familyId: localStorage.getItem("familyId"),
             fromDate: fromDate,
             toDate: calcDate(0),
-            currentDate: fromDate == new Date().toISOString().substring(0, 10) ? true : false
+            currentDate: fromDate == getCurrentDate() ? true : false
         }
         useEffect(() => {
             setSpinner(true);
@@ -193,11 +199,27 @@ export default function currentReport() {
         return "N/A"
     }
 
-    const getCurrentReport = () => {
-        if(healthList.length>0){
-            return(
-                <div className="content">
-                                <CurrentDatetime />
+    // const getCurrentReport = () => {
+    //     if(healthList.length>0){
+    //         return(
+
+    //         )
+    //     }
+    //     return (
+    //         <div>No Records Found</div>
+    //     )
+    // }
+
+
+    return (
+        <>
+            <div id="wrapper">
+                <div id="main">
+                    <div className="inner">
+
+                        <section id="banner">
+                        <div className="content">
+                                {/* <CurrentDatetime /> */}
 
                                
 
@@ -207,7 +229,7 @@ export default function currentReport() {
                                     {healthList.map((d, id) => {
                                         return (
                                             <>
-                                                <span className="reportBreak" key={id + "time"}>{((d && d.createdAt) ? (new Date(d.createdAt)) : (new Date())).toLocaleString()}</span>
+                                                <p  className="reportBreak">Report On: <span key={id + "time"}>{((d && d.createdAt) ? (new Date(d.createdAt)) : (new Date())).toLocaleString()}</span></p>
 
                                                  <div className="score">
                                     <div className="meter">
@@ -283,22 +305,6 @@ export default function currentReport() {
                                     <a href="#" className="button primary" onClick={() => binahPage()}> Test Again</a>
                                 </p>
                             </div>
-            )
-        }
-        return (
-            <div>No Records Found</div>
-        )
-    }
-
-
-    return (
-        <>
-            <div id="wrapper">
-                <div id="main">
-                    <div className="inner">
-
-                        <section id="banner">
-                            {getCurrentReport()}
                         </section>
                     </div></div>
                 <SidebarNew />
