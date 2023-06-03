@@ -1,9 +1,9 @@
-import React from 'react';
-import styled from 'styled-components';
-import Play from '../assets/play-big.svg';
-import Stop from '../assets/stop.svg';
-import media from '../style/media';
-import Spinner from './Spinner';
+import React from "react";
+import styled from "styled-components";
+import Play from "../assets/play-big.svg";
+import Stop from "../assets/stop.svg";
+import media from "../style/media";
+import Spinner from "./Spinner";
 
 const Container = styled.div`
   display: flex;
@@ -42,7 +42,7 @@ export interface IStartButton {
   /**
    *  Displays a spinner when isLoading is true
    */
-  isLoading:boolean;
+  isLoading: boolean;
   /**
    *  function triggered on button click
    */
@@ -58,11 +58,11 @@ const StartButton = ({ isLoading, onClick, isMeasuring }: IStartButton) => {
     <Container>
       {isLoading ? (
         <Spinner />
-      ) : (
-        <Button onClick={onClick}>
-          {isMeasuring ? "Stop" : "Measure Now"}
-          {/* <Icon src={isMeasuring ? Stop : Play} /> */}
-        </Button>
+      ) : ( !isMeasuring && <Button onClick={onClick}>Measure Now</Button>
+        // <Button onClick={onClick}>
+        //   {isMeasuring ? "Stop" : "Measure Now"}
+        //   {/* <Icon src={isMeasuring ? Stop : Play} /> */}
+        // </Button>
       )}
     </Container>
   );

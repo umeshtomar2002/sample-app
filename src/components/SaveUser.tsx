@@ -212,6 +212,7 @@ export default function saveUser() {
                                     <form onSubmit={handleSubmit}>
                                         <div className="row gtr-uniform">
                                             <div className="col-6 col-12-xsmall">
+												<label>Full Name</label>
                                                 <Input
                                                     type="text"
                                                     name="fullname"
@@ -223,6 +224,7 @@ export default function saveUser() {
                                                 {errors.fullname && touched.fullname && errors.fullname && <Tag style={tagStyle}>{errors.fullname}</Tag>}
                                             </div>
                                             <div className="col-6 col-12-xsmall">
+												<label>Email ID</label>
                                                 <Input
                                                     type="email"
                                                     name="email"
@@ -234,6 +236,7 @@ export default function saveUser() {
                                                 {errors.email && touched.email && errors.email && <Tag style={tagStyle}>{errors.email}</Tag>}
                                             </div>
                                             <div className="col-6 col-12-xsmall">
+												<label>Mobile No</label>
                                                 <PhoneInput
                                                     country={"in"}
                                                     placeholder='Enter Mobile No.'
@@ -257,8 +260,8 @@ export default function saveUser() {
                                                 /> */}
                                                 {errors.mobileNo && touched.mobileNo && errors.mobileNo && <Tag style={tagStyle}>{errors.mobileNo}</Tag>}
                                             </div>
-                                            <div id="my-radio-group" className="col-2 col-12-small">Date of birth</div>
-                                            <div className="col-4 col-12-xsmall">
+                                           
+                                            <div className="col-6 col-12-xsmall"><label>Date of Birth</label>
                                                 <Input
                                                     type="date"
                                                     name="dob"
@@ -276,8 +279,8 @@ export default function saveUser() {
                                                 /> */}
                                                 {errors.dob && touched.dob && errors.dob && <Tag style={tagStyle}>{errors.dob}</Tag>}
                                             </div>
-                                            <div id="my-radio-group" className="col-1 col-12-small">Gender</div>
-                                            <div className="col-11 col-12-small" area-aria-labelledby="my-radio-group">
+                                            
+                                            <div className="col-12 col-12-small" area-aria-labelledby="my-radio-group"><label>Gender</label>
 
                                                 <Field type="radio" name="gender" value="male" id="male" />
                                                 <label htmlFor="male"> Male </label>
@@ -288,7 +291,7 @@ export default function saveUser() {
                                                 <Field type="radio" name="gender" value="other" id="other" />
                                                 <label htmlFor="other"> Other </label>
                                             </div>
-                                            <div className="col-6 col-12-small">
+                                            <div className="col-6 col-12-small"><label>Weight</label>
 
                                                 <Input
                                                     type="text"
@@ -323,7 +326,7 @@ export default function saveUser() {
                                                                                 </option>
                                                                         </select>                                                                         */}
                                             </div>
-                                            <div className="col-6 col-12-small">
+                                            <div className="col-6 col-12-small"><label>Height</label>
 
                                                 <Input
                                                     type="text"
@@ -358,7 +361,7 @@ export default function saveUser() {
                                                                             </option>
                                                                     </select> */}
                                             </div>
-                                            <div className="col-12 mt-20">
+                                            <div className="col-12 mt-10">
                                                 <ul className="actions">
                                                     <li><Button className="primary" onClick={() => submitForm()}> Submit </Button></li>
                                                     <li><Button> Reset </Button></li>

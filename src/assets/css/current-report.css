@@ -51,7 +51,7 @@ svg {
 	    font-size: 2rem;
     font-weight: bolder;
 }
-			.result li{list-style-type:none; margin: 7px;  box-shadow: 0px 0px 2px #ddd; padding: 10px 15px; display: inline-block; width: 18%; border-radius: 10px;}
+			.result li{list-style-type:none; margin: 7px;  box-shadow: 0px 0px 2px #ddd; padding: 10px 15px; display: inline-block; width: 23%; border-radius: 10px;}
 			.result li p{margin-bottom:0px; }
 			.result li p.r-icon {font-size:12px}
 			.result li p.r-icon img{width:35px; height: 35px; display: block;}
@@ -65,11 +65,16 @@ svg {
 }
 
 .reportBreak{
-  display: flex;
+
   width: 100%;
   /* border-bottom: 1px solid lightgrey; */
-  justify-content: center;
-  margin: 4px 0;
+ padding: 10px;
+    text-align: left;
+    display: block;
+    background: #f1f1f1;
+    border-radius: 10px;
+    margin: 20px 0px 10px;
+    color: #000;
 
 }
 .meterResult{
