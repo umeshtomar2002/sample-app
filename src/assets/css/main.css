@@ -3743,3 +3743,9 @@ button:disabled,
       top: 44%;
       width: 0;
   }
+
+  .loginBannerFix{
+    position: fixed;
+    height: 100vh;
+    left: 0px;
+  }

@@ -26,7 +26,7 @@ export default function Login() {
     const mystyle = {
         // maxWidth: '200px',
         // maxHeight: 'calc(100%-20px)',
-        overflow: 'hidden',
+        // overflow: 'hidden',
         // height: 'calc(0.38461 * 100vw - 184px)',
         // width: 'calc(0.38461 * 100vw - 184px)',
     };
@@ -58,7 +58,7 @@ export default function Login() {
         }else{
             return (
                 <Col md={12} lg={12} xl={12} className="loginBanner">
-                    <img src={LoginBanner} style={mystyle}/>
+                    <img src={LoginBanner} className="loginBannerFix" style={mystyle}/>
                 </Col>
             )
         }
