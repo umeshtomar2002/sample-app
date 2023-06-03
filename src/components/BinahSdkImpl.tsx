@@ -31,6 +31,9 @@ const BinahSdkImpl = () => {
     UAParser(navigator.userAgent).device.type === 'mobile',
   );
   useDisableZoom();
+  if(!localStorage.getItem("familyId")){
+    navigate("/addUser")
+  }
 
   const onSettingsClickedHandler = useCallback((event) => {
     const settingsBars = document.getElementById('settingsBars');
