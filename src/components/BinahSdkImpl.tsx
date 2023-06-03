@@ -85,8 +85,8 @@ const BinahSdkImpl = () => {
           <section id="inside">
             <div className="content">
               <header>
-                <h2 className="align-center">Ready to measure your vitals.</h2>
-                <p className="align-center">Relax sit still, breathe normally. Ensure your face is evenly illuminated and there is no direct light source in front or behind you.</p>
+                <h2 className="align-center hideonmobile">Ready to measure your vitals.</h2>
+                <p className="align-center mobMargin">Relax sit still, breathe normally. Ensure your face is evenly illuminated and there is no direct light source in front or behind you.</p>
               </header>
               <article className="align-center">
                 <a href="#" className="image align-center"></a>

@@ -262,6 +262,12 @@ h6 {
 }
 
 @media screen and (max-width: 980px) {
+  .hideonmobile{
+    display: none;
+  }
+  .mobMargin{
+    margin-top: 100px !important;
+  }
   h1 {
     font-size: 3.25em;
   }

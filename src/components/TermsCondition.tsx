@@ -1,12 +1,13 @@
 import * as React from 'react';
 import "../assets/css/main.css";
+import LoginSvg from '../assets/images/Logo.svg';
 
 export default function TermsCondition() {
     return (
 
         <div>
             <section id="main" className="alt align-left" style={{ background: '#f1f1f1', padding: '10px', boxShadow: '0px 0px 10px #ddd', marginBottom: '30px' }}>
-                <div className="inner"><img src="../assets/Logo.svg" alt="Drivn Fintech" width={80} /></div>
+                <div className="inner"><img src={LoginSvg} alt="Drivn Fintech" width={80} /></div>
             </section>
             <section id="main">
                 <div className="inner">

@@ -321,7 +321,7 @@ export default function currentReport() {
                                 <p id="reportButtons" className="clear text-center">
                                     <a href={getWhatsappLink()} data-action="share/whatsapp/share" target="_blank"
                                         className="button icon solid fa-share"> Share</a>
-                                    &nbsp;
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <a href="#" className="button primary" onClick={() => binahPage()}> Test Again</a>
                                 </p>
                             </div>
