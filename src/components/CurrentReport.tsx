@@ -176,11 +176,20 @@ export default function currentReport() {
 
         if (healthList.length > 0 && healthList[index].wellnessIndex && healthList[index].wellnessIndex != "N/A") {
             meterResult = healthList[index]?.wellnessIndex + "/10"
+            // console.log("wellnessIndex:::", healthList[0].wellnessIndex)
+        }
+        return meterResult
+    }
+
+    const getTransformStyle = (index) => {
+        let meterTransformStyle = { transform: "rotate(-110deg)" };
+
+        if (healthList.length > 0 && healthList[index].wellnessIndex && healthList[index].wellnessIndex != "N/A") {
             let degree = -110 + 22 * healthList[index].wellnessIndex;
             meterTransformStyle = { transform: `rotate(${degree}deg)` };
             // console.log("wellnessIndex:::", healthList[0].wellnessIndex)
         }
-        return meterResult
+        return meterTransformStyle
     }
 
     const getIndicator = (index) => {
@@ -259,7 +268,7 @@ export default function currentReport() {
                                                                 </linearGradient>
                                                             </defs>
                                                         </svg>
-                                                        <svg width="30" height="144" id="needle" style={meterTransformStyle} viewBox="0 0 30 144" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <svg width="30" height="144" id="needle" style={getTransformStyle(id)} viewBox="0 0 30 144" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                             <circle cx="15.2089" cy="128.608" r="10.9086" fill="white" stroke="#01C738" strokeWidth="7" />
                                                             <path fillRule="evenodd" clipRule="evenodd" d="M17.3486 0.920656L25.3277 127.679L25.3166 127.679C25.322 127.833 25.3239 127.988 25.322 128.144C25.2587 133.535 20.8377 137.853 15.4474 137.79C10.0571 137.726 5.73875 133.305 5.80203 127.915C5.80386 127.759 5.80934 127.604 5.81838 127.45L5.80766 127.45L17.3486 0.920656ZM19.2238 134.487C22.4036 132.316 23.2212 127.978 21.0498 124.798C18.8784 121.618 14.5404 120.801 11.3606 122.972C8.18076 125.144 7.36323 129.482 9.53459 132.661C11.706 135.841 16.044 136.659 19.2238 134.487Z" fill="url(#paint0_linear_498_1180)" />
                                                             <defs>
