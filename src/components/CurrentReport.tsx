@@ -149,11 +149,13 @@ export default function currentReport() {
 
     if (location.state.page == 'viewReport') {
         let fromDate = calcDate(location.state.data.report)
+        let currentDateFlag = fromDate == getCurrentDate() ? true : false
         const data = {
             familyId: localStorage.getItem("familyId"),
-            fromDate: fromDate,
-            toDate: calcDate(0),
-            currentDate: fromDate == getCurrentDate() ? true : false
+            fromDate: currentDateFlag ? "" : fromDate,
+            toDate: currentDateFlag ? "" : calcDate(0),
+            // currentDate: false,
+            limit: currentDateFlag ? 1 : ""
         }
         useEffect(() => {
             setSpinner(true);

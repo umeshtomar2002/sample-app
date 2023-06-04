@@ -91,11 +91,13 @@ export default function viewReport() {
                                     let state = { page: 'viewReport', data: values }
                                     localStorage.setItem('familyId', values.member);
                                     let fromDate = calcDate(parseInt(values.report))
+                                    let currentDateFlag = fromDate == getCurrentDate() ? true : false
                                     const data = {
                                         familyId: localStorage.getItem("familyId"),
-                                        fromDate: fromDate,
-                                        toDate: calcDate(0),
-                                        currentDate: fromDate == getCurrentDate() ? true : false
+                                        fromDate: currentDateFlag ? "" : fromDate,
+                                        toDate: currentDateFlag ? "" : calcDate(0),
+                                        // currentDate: false,
+                                        limit: currentDateFlag ? 1 : ""
                                     }
                                     console.log("header::::", data);
 
